@@ -4,6 +4,8 @@ Agentic Safety Review is a portable skill and rulebook package for baseline-firs
 
 It is an agentic coding guardrail and review signal tool, not a vulnerability scanner. Findings should be treated as evidence-backed review prompts that can include false positives or missing evidence.
 
+Safety Manager is meant to extend Codex, Claude, Cursor, or other agent self-review workflows with an explicit rulebook, claim-strength metadata, evidence requirements, and repeatable fixture evals. It does not claim to be more accurate than built-in self-review or to prove exploitability.
+
 repo-local rules cannot weaken baseline safety. Local rules may add stricter project requirements, but a local convention that conflicts with the baseline must be reported as drift.
 
 ## Modes
@@ -65,6 +67,8 @@ npm run eval
 
 The evaluation report writes `eval/report.md` and `eval/report.json`. It scores Recall, Precision, verdict accuracy, evidence quality, actionability, and domain coverage into an Overall Score. This score measures current benchmark behavior, not general real-world accuracy.
 
+Reports separate severity from claim strength with `claim_type`, `confidence`, and `evidence_strength`, plus path, line, and snippet evidence when available.
+
 Build a public feedback bundle with sample reports, limitations, reviewer rubric, feedback template, eval report, and discussion post draft:
 
 ```bash
@@ -97,3 +101,7 @@ Useful docs:
 - Human Architecture Review Required
 
 Rebuild From Baseline produces a rebuild brief. It does not authorize immediate implementation.
+
+## License
+
+MIT License. See [LICENSE](LICENSE).

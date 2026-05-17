@@ -249,7 +249,9 @@ function feedbackCsv() {
 function postDraft() {
   return `# I built an experimental safety review tool for agentic coding projects and need brutally honest feedback
 
-I built Safety Manager, an experimental agentic coding guardrail and review signal tool. It reviews local repo evidence against a small rulebook and produces findings, evidence notes, missing-evidence notes, and suggested next actions.
+I built Safety Manager, an experimental agentic coding guardrail and review signal tool. It is meant to extend Codex/Claude/Cursor-style self-review with an explicit rulebook, claim-strength metadata, evidence requirements, and repeatable fixture evals.
+
+It reviews local repo evidence against a small rulebook and produces findings, evidence notes, missing-evidence notes, claim type, confidence, evidence strength, and suggested next actions.
 
 I am looking for practical feedback, not praise. I want to know whether the findings would help in real agent-assisted coding review, where the evidence is weak, and where the tool over-warns.
 
@@ -257,7 +259,9 @@ I am looking for practical feedback, not praise. I want to know whether the find
 
 - Local rulebook and fixture-based audit tool.
 - Review signal generator for agentic coding projects.
-- Report generator with sample reports and a benchmark eval report.
+- Self-review extension prompt/rule layer for coding agents.
+- Report generator with sample reports, line/snippet evidence, and a benchmark eval report.
+- MIT-licensed project.
 
 ## What it is not
 
@@ -265,6 +269,7 @@ I am looking for practical feedback, not praise. I want to know whether the find
 - Not a CVE detector.
 - Not proof that any real repo is vulnerable.
 - Not a replacement for human security review.
+- Not a claim that this is more accurate than built-in model self-review.
 
 ## Try it
 
@@ -279,14 +284,16 @@ npm run review-pack
 
 - Finding usefulness: would this finding help you review an agent-written change?
 - Evidence credibility: does the cited evidence justify the conclusion?
-- False positives: what would create noise in real repos?
+- False positives / false negatives: what would create noise or miss important review signals in real repos?
 - Actionability: is the recommended next step specific enough?
 - Code quality: do the implementation-quality checks catch maintainability issues without becoming subjective style noise?
+- Claim calibration: are \`claim_type\`, \`confidence\`, and \`evidence_strength\` useful, or too much structure?
 
 Links:
 
 - GitHub repo: ${repoUrl}
 - Sample report: ${sampleReportUrl}
+- Eval report: ${repoUrl}/blob/main/review-pack/eval-report.md
 - Review rubric: ${rubricUrl}
 - Code quality rubric: ${codeQualityRubricUrl}
 `;
