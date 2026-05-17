@@ -218,11 +218,15 @@ Context reviewed:
 - Evidence that felt weak:
 - Missing evidence that should be requested:
 
-## False Positives
+## False Positives / False Negatives
 
 - Likely false positive:
 - Why:
 - Suggested wording or rule change:
+- Likely false negative:
+- Missing rule, pattern, or fixture:
+- Suggested evidence to catch it:
+- Reviewer verdict: true positive | false positive | false negative | unclear
 
 ## Actionability
 
@@ -239,7 +243,7 @@ Context reviewed:
 }
 
 function feedbackCsv() {
-  return 'report,finding_id,usefulness_1_5,evidence_credibility_1_5,false_positive_risk_1_5,actionability_1_5,severity_calibration_1_5,notes\n';
+  return 'report,finding_id,claim_type,confidence,evidence_strength,reviewer_verdict,usefulness_1_5,evidence_credibility_1_5,false_positive_risk_1_5,false_negative_risk_1_5,actionability_1_5,severity_calibration_1_5,notes\n';
 }
 
 function postDraft() {

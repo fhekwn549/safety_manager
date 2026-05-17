@@ -19,10 +19,13 @@ Fixture: unsafe-supply-chain
 
 Severity: high
 Decision: BLOCK
+Claim type: confirmed_misconfiguration
+Confidence: high
+Evidence strength: direct
 Affected domains: supply-chain
 Blast radius: module
 Evidence:
-- package.json
+- package.json:7 - "dependency_lifecycle_scripts_unbounded": true,
 Reasoning:
 - Fixture evidence matches ASR-SC-003.
 Required action:
@@ -32,10 +35,13 @@ Required action:
 
 Severity: critical
 Decision: BLOCK
+Claim type: confirmed_misconfiguration
+Confidence: high
+Evidence strength: direct
 Affected domains: supply-chain
 Blast radius: system
 Evidence:
-- package.json
+- package.json:8 - "package_publishing_unprotected": true,
 Reasoning:
 - Fixture evidence matches ASR-SC-004.
 Required action:
@@ -45,10 +51,13 @@ Required action:
 
 Severity: high
 Decision: BLOCK
+Claim type: risky_pattern
+Confidence: high
+Evidence strength: direct
 Affected domains: supply-chain
 Blast radius: module
 Evidence:
-- package.json
+- package.json:9 - "dependency_confusion_risk": true
 Reasoning:
 - Fixture evidence matches ASR-SC-007.
 Required action:

@@ -19,6 +19,10 @@ test('auditRepo exposes structured report data for JSON output', async () => {
     'ASR-DOCKER-002',
     'ASR-RUNTIME-001',
   ]);
+  assert.ok(result.reportData.findings.every((finding) => finding.claim_type));
+  assert.ok(result.reportData.findings.every((finding) => finding.confidence));
+  assert.ok(result.reportData.findings.every((finding) => finding.evidence_strength));
+  assert.ok(result.reportData.findings.every((finding) => finding.evidence.every((item) => 'snippet' in item)));
   assert.ok(result.reportData.scorecard);
   assert.ok(result.reportData.runtimeCveExposure);
   assert.ok(Array.isArray(result.reportData.missingEvidence));
@@ -41,6 +45,9 @@ test('audit CLI writes JSON report when requested', async () => {
     'ASR-CI-002',
     'ASR-CI-005',
   ]);
+  assert.ok(json.findings.every((finding) => finding.claim_type));
+  assert.ok(json.findings.every((finding) => finding.confidence));
+  assert.ok(json.findings.every((finding) => finding.evidence_strength));
   assert.equal(json.remediation.strategy, 'Strangler Migration');
   assert.ok(json.runtimeCveExposure);
   assert.ok(json.missingEvidence.length > 0);

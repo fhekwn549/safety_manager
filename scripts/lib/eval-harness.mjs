@@ -27,7 +27,13 @@ function divide(numerator, denominator, emptyValue = 1) {
 function hasUsableEvidence(finding) {
   return Array.isArray(finding.evidence)
     && finding.evidence.length > 0
-    && finding.evidence.every((item) => !/^Missing Evidence/i.test(item));
+    && finding.evidence.every((item) => {
+      if (typeof item === 'string') return !/^Missing Evidence/i.test(item);
+      if (['missing_evidence', 'needs_human_review'].includes(finding.claim_type)) {
+        return Boolean(item.path || item.snippet);
+      }
+      return item.strength !== 'missing' && !/^Missing Evidence/i.test(item.snippet ?? '');
+    });
 }
 
 function hasActionableStrategy(finding) {
@@ -97,6 +103,61 @@ function calculateDomainScores(caseResults) {
       recall,
       precision,
       score: Math.round(((recall + precision) / 2) * 100),
+    }];
+  }));
+}
+
+function calculateRuleCoverage(caseResults) {
+  const ruleStats = new Map();
+
+  function ensure(ruleId, findings) {
+    if (!ruleStats.has(ruleId)) {
+      ruleStats.set(ruleId, {
+        domain: domainFromRule(ruleId, findings).join(', '),
+        expected: 0,
+        actual: 0,
+        truePositive: 0,
+        falsePositive: 0,
+        falseNegative: 0,
+      });
+    }
+    return ruleStats.get(ruleId);
+  }
+
+  for (const result of caseResults) {
+    for (const ruleId of result.expectedFindings) {
+      const stats = ensure(ruleId, result.actualFindings);
+      stats.expected += 1;
+    }
+
+    for (const finding of result.actualFindings) {
+      const stats = ensure(finding.ruleId, result.actualFindings);
+      stats.actual += 1;
+    }
+
+    for (const ruleId of result.truePositiveFindings) {
+      const stats = ensure(ruleId, result.actualFindings);
+      stats.truePositive += 1;
+    }
+
+    for (const ruleId of result.falsePositiveFindings) {
+      const stats = ensure(ruleId, result.actualFindings);
+      stats.falsePositive += 1;
+    }
+
+    for (const ruleId of result.falseNegativeFindings) {
+      const stats = ensure(ruleId, result.actualFindings);
+      stats.falseNegative += 1;
+    }
+  }
+
+  return Object.fromEntries([...ruleStats.entries()].sort().map(([ruleId, stats]) => {
+    const recall = divide(stats.truePositive, stats.expected);
+    const precision = divide(stats.truePositive, stats.actual);
+    return [ruleId, {
+      ...stats,
+      recall,
+      precision,
     }];
   }));
 }
@@ -184,6 +245,7 @@ export async function runEvaluation({ casesPath = 'eval/cases.json' } = {}) {
       overall: calculateOverallScore(metrics),
     },
     domainScores: calculateDomainScores(caseResults),
+    ruleCoverage: calculateRuleCoverage(caseResults),
     cases: caseResults,
   };
 }
@@ -200,6 +262,10 @@ export function formatEvaluationMarkdown(result) {
 
   const domainRows = Object.entries(result.domainScores)
     .map(([domain, score]) => `| ${domain} | ${score.score} | ${(score.recall * 100).toFixed(1)}% | ${(score.precision * 100).toFixed(1)}% | ${score.expected} | ${score.actual} |`)
+    .join('\n');
+
+  const coverageRows = Object.entries(result.ruleCoverage)
+    .map(([ruleId, coverage]) => `| ${ruleId} | ${coverage.domain} | ${coverage.expected} | ${coverage.actual} | ${coverage.truePositive} | ${coverage.falsePositive} | ${coverage.falseNegative} | ${(coverage.recall * 100).toFixed(1)}% | ${(coverage.precision * 100).toFixed(1)}% |`)
     .join('\n');
 
   const caseRows = result.cases
@@ -234,6 +300,14 @@ ${metricRows}
 | Domain | Score | Recall | Precision | Expected | Actual |
 | --- | ---: | ---: | ---: | ---: | ---: |
 ${domainRows}
+
+## Coverage Matrix
+
+This matrix shows fixture coverage by rule. It is benchmark coverage, not real-world accuracy.
+
+| Rule | Domain | Expected | Actual | True Positive | False Positive | False Negative | Recall | Precision |
+| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+${coverageRows}
 
 ## Cases
 

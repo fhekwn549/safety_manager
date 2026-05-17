@@ -21,8 +21,16 @@
         "supply-chain"
       ],
       "strategy": "Incremental Refactor with Human Checkpoints",
+      "claim_type": "confirmed_misconfiguration",
+      "confidence": "high",
+      "evidence_strength": "direct",
       "evidence": [
-        "package.json"
+        {
+          "path": "package.json",
+          "line": 7,
+          "snippet": "\"dependency_lifecycle_scripts_unbounded\": true,",
+          "strength": "direct"
+        }
       ]
     },
     {
@@ -33,8 +41,16 @@
         "supply-chain"
       ],
       "strategy": "Human Architecture Review Required",
+      "claim_type": "confirmed_misconfiguration",
+      "confidence": "high",
+      "evidence_strength": "direct",
       "evidence": [
-        "package.json"
+        {
+          "path": "package.json",
+          "line": 8,
+          "snippet": "\"package_publishing_unprotected\": true,",
+          "strength": "direct"
+        }
       ]
     },
     {
@@ -45,8 +61,16 @@
         "supply-chain"
       ],
       "strategy": "Incremental Refactor with Human Checkpoints",
+      "claim_type": "risky_pattern",
+      "confidence": "high",
+      "evidence_strength": "direct",
       "evidence": [
-        "package.json"
+        {
+          "path": "package.json",
+          "line": 9,
+          "snippet": "\"dependency_confusion_risk\": true",
+          "strength": "direct"
+        }
       ]
     }
   ],

@@ -19,11 +19,13 @@ Fixture: unsafe-docker
 
 Severity: high
 Decision: BLOCK
+Claim type: missing_evidence
+Confidence: medium
+Evidence strength: missing
 Affected domains: docker-runtime
 Blast radius: module
 Evidence:
-- Dockerfile
-- docker-compose.yml
+- Dockerfile: Missing Evidence: no non-root USER directive found
 Reasoning:
 - Fixture evidence matches ASR-DOCKER-001.
 Required action:
@@ -33,11 +35,13 @@ Required action:
 
 Severity: critical
 Decision: BLOCK
+Claim type: confirmed_misconfiguration
+Confidence: high
+Evidence strength: direct
 Affected domains: docker-runtime
 Blast radius: system
 Evidence:
-- Dockerfile
-- docker-compose.yml
+- docker-compose.yml:4 - privileged: true
 Reasoning:
 - Fixture evidence matches ASR-DOCKER-002.
 Required action:
@@ -47,11 +51,13 @@ Required action:
 
 Severity: critical
 Decision: BLOCK
+Claim type: needs_human_review
+Confidence: medium
+Evidence strength: indirect
 Affected domains: docker-runtime, ci-cd, agent-config
 Blast radius: system
 Evidence:
-- Dockerfile
-- docker-compose.yml
+- docker-compose.yml:6 - untrusted_workload: true
 Reasoning:
 - Fixture evidence matches ASR-RUNTIME-001.
 Required action:

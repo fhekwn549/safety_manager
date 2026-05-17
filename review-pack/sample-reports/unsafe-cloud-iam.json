@@ -21,8 +21,16 @@
         "cloud-iam"
       ],
       "strategy": "Human Architecture Review Required",
+      "claim_type": "confirmed_misconfiguration",
+      "confidence": "high",
+      "evidence_strength": "direct",
       "evidence": [
-        "cloud-iam.yml"
+        {
+          "path": "cloud-iam.yml",
+          "line": 1,
+          "snippet": "service_account_reused_across_envs: true",
+          "strength": "direct"
+        }
       ]
     },
     {
@@ -33,8 +41,16 @@
         "cloud-iam"
       ],
       "strategy": "Human Architecture Review Required",
+      "claim_type": "missing_evidence",
+      "confidence": "medium",
+      "evidence_strength": "missing",
       "evidence": [
-        "cloud-iam.yml"
+        {
+          "path": "cloud-iam.yml",
+          "line": 2,
+          "snippet": "public_resource_policy_without_owner: true",
+          "strength": "direct"
+        }
       ]
     },
     {
@@ -45,8 +61,16 @@
         "cloud-iam"
       ],
       "strategy": "Incremental Refactor with Human Checkpoints",
+      "claim_type": "missing_evidence",
+      "confidence": "medium",
+      "evidence_strength": "missing",
       "evidence": [
-        "cloud-iam.yml"
+        {
+          "path": "cloud-iam.yml",
+          "line": 3,
+          "snippet": "break_glass_without_owner: true",
+          "strength": "direct"
+        }
       ]
     }
   ],

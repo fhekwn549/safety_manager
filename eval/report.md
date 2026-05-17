@@ -38,6 +38,36 @@ Overall Score: 100/100
 | sensitive-config | 100 | 100.0% | 100.0% | 2 | 2 |
 | supply-chain | 100 | 100.0% | 100.0% | 3 | 3 |
 
+## Coverage Matrix
+
+This matrix shows fixture coverage by rule. It is benchmark coverage, not real-world accuracy.
+
+| Rule | Domain | Expected | Actual | True Positive | False Positive | False Negative | Recall | Precision |
+| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| ASR-AGENT-001 | agent-config | 1 | 1 | 1 | 0 | 0 | 100.0% | 100.0% |
+| ASR-AGENT-002 | agent-config, sensitive-config | 1 | 1 | 1 | 0 | 0 | 100.0% | 100.0% |
+| ASR-AI-001 | data-privacy, agent-config | 1 | 1 | 1 | 0 | 0 | 100.0% | 100.0% |
+| ASR-AI-002 | data-privacy | 1 | 1 | 1 | 0 | 0 | 100.0% | 100.0% |
+| ASR-AI-003 | data-privacy, agent-config | 1 | 1 | 1 | 0 | 0 | 100.0% | 100.0% |
+| ASR-AI-004 | data-privacy, agent-config | 1 | 1 | 1 | 0 | 0 | 100.0% | 100.0% |
+| ASR-API-001 | api-contract | 1 | 1 | 1 | 0 | 0 | 100.0% | 100.0% |
+| ASR-API-002 | api-contract | 1 | 1 | 1 | 0 | 0 | 100.0% | 100.0% |
+| ASR-CI-001 | ci-cd | 1 | 1 | 1 | 0 | 0 | 100.0% | 100.0% |
+| ASR-CI-002 | ci-cd, sensitive-config | 1 | 1 | 1 | 0 | 0 | 100.0% | 100.0% |
+| ASR-CI-005 | ci-cd, docker-runtime | 1 | 1 | 1 | 0 | 0 | 100.0% | 100.0% |
+| ASR-DB-001 | database, payments-entitlements | 1 | 1 | 1 | 0 | 0 | 100.0% | 100.0% |
+| ASR-DOCKER-001 | docker-runtime | 1 | 1 | 1 | 0 | 0 | 100.0% | 100.0% |
+| ASR-DOCKER-002 | docker-runtime | 1 | 1 | 1 | 0 | 0 | 100.0% | 100.0% |
+| ASR-IAM-003 | cloud-iam | 1 | 1 | 1 | 0 | 0 | 100.0% | 100.0% |
+| ASR-IAM-004 | cloud-iam | 1 | 1 | 1 | 0 | 0 | 100.0% | 100.0% |
+| ASR-IAM-006 | cloud-iam | 1 | 1 | 1 | 0 | 0 | 100.0% | 100.0% |
+| ASR-LOCAL-001 | agent-config | 1 | 1 | 1 | 0 | 0 | 100.0% | 100.0% |
+| ASR-PAY-001 | payments-entitlements, database | 1 | 1 | 1 | 0 | 0 | 100.0% | 100.0% |
+| ASR-RUNTIME-001 | docker-runtime, ci-cd, agent-config | 1 | 1 | 1 | 0 | 0 | 100.0% | 100.0% |
+| ASR-SC-003 | supply-chain | 1 | 1 | 1 | 0 | 0 | 100.0% | 100.0% |
+| ASR-SC-004 | supply-chain | 1 | 1 | 1 | 0 | 0 | 100.0% | 100.0% |
+| ASR-SC-007 | supply-chain | 1 | 1 | 1 | 0 | 0 | 100.0% | 100.0% |
+
 ## Cases
 
 | Case | Status | Expected Verdict | Actual Verdict | Findings Matched | False Positives |

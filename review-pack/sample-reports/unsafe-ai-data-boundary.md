@@ -20,10 +20,13 @@ Fixture: unsafe-ai-data-boundary
 
 Severity: critical
 Decision: BLOCK
+Claim type: confirmed_misconfiguration
+Confidence: high
+Evidence strength: direct
 Affected domains: data-privacy, agent-config
 Blast radius: system
 Evidence:
-- ai-data-policy.yml
+- ai-data-policy.yml:1 - ai_tenant_mix_without_isolation: true
 Reasoning:
 - Fixture evidence matches ASR-AI-001.
 Required action:
@@ -33,10 +36,13 @@ Required action:
 
 Severity: critical
 Decision: BLOCK
+Claim type: missing_evidence
+Confidence: medium
+Evidence strength: missing
 Affected domains: data-privacy
 Blast radius: system
 Evidence:
-- ai-data-policy.yml
+- ai-data-policy.yml:2 - training_without_opt_out: true
 Reasoning:
 - Fixture evidence matches ASR-AI-002.
 Required action:
@@ -46,10 +52,13 @@ Required action:
 
 Severity: critical
 Decision: BLOCK
+Claim type: missing_evidence
+Confidence: medium
+Evidence strength: missing
 Affected domains: data-privacy, agent-config
 Blast radius: system
 Evidence:
-- ai-data-policy.yml
+- ai-data-policy.yml:3 - high_impact_no_human_review: true
 Reasoning:
 - Fixture evidence matches ASR-AI-003.
 Required action:
@@ -59,10 +68,13 @@ Required action:
 
 Severity: high
 Decision: BLOCK
+Claim type: missing_evidence
+Confidence: medium
+Evidence strength: missing
 Affected domains: data-privacy, agent-config
 Blast radius: module
 Evidence:
-- ai-data-policy.yml
+- ai-data-policy.yml:4 - tool_output_external_processor_no_boundary: true
 Reasoning:
 - Fixture evidence matches ASR-AI-004.
 Required action:

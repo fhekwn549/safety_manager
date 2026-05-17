@@ -4,6 +4,15 @@ MVP reports are markdown. Keep scanner evidence and agent reasoning separate.
 
 JSON output uses the same decision model as the markdown report. Stable top-level fields are `verdict`, `mode`, `scope`, `subject`, `summary`, `findings`, `scorecard`, `remediation`, `runtimeCveExposure`, and `missingEvidence`.
 
+Each finding must separate risk priority from claim strength:
+
+- `severity`: practical review priority if the signal is real.
+- `claim_type`: `confirmed_misconfiguration`, `missing_evidence`, `risky_pattern`, or `needs_human_review`.
+- `confidence`: `low`, `medium`, or `high`.
+- `evidence_strength`: `direct`, `indirect`, `missing`, or `inferred`.
+
+Evidence entries should include path, line, snippet, and strength when available. Missing evidence is valid evidence metadata, but it must not be presented as proof of exploitability.
+
 ```text
 # Agentic Safety Review Report
 
@@ -25,10 +34,13 @@ Scope: <affected domains>
 
 Severity: info | low | medium | high | critical
 Decision: PASS | WARN | BLOCK | NEEDS_HUMAN_REVIEW | MIGRATION_PLAN_REQUIRED
+Claim type: confirmed_misconfiguration | missing_evidence | risky_pattern | needs_human_review
+Confidence: low | medium | high
+Evidence strength: direct | indirect | missing | inferred
 Affected domains: <domains>
 Blast radius: local | module | workflow | service | system | unknown
 Evidence:
-- <file:line, command output, config, schema, scanner result, or missing evidence>
+- <path:line - snippet, command output, config, schema, scanner result, or explicit missing evidence>
 Reasoning:
 - <agent reasoning, separate from evidence>
 Required action:

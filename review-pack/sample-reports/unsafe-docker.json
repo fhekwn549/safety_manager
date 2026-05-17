@@ -23,9 +23,16 @@
         "docker-runtime"
       ],
       "strategy": "Incremental Refactor",
+      "claim_type": "missing_evidence",
+      "confidence": "medium",
+      "evidence_strength": "missing",
       "evidence": [
-        "Dockerfile",
-        "docker-compose.yml"
+        {
+          "path": "Dockerfile",
+          "line": null,
+          "snippet": "Missing Evidence: no non-root USER directive found",
+          "strength": "missing"
+        }
       ]
     },
     {
@@ -36,9 +43,16 @@
         "docker-runtime"
       ],
       "strategy": "Human Architecture Review Required",
+      "claim_type": "confirmed_misconfiguration",
+      "confidence": "high",
+      "evidence_strength": "direct",
       "evidence": [
-        "Dockerfile",
-        "docker-compose.yml"
+        {
+          "path": "docker-compose.yml",
+          "line": 4,
+          "snippet": "privileged: true",
+          "strength": "direct"
+        }
       ]
     },
     {
@@ -51,9 +65,16 @@
         "agent-config"
       ],
       "strategy": "MIGRATION_PLAN_REQUIRED",
+      "claim_type": "needs_human_review",
+      "confidence": "medium",
+      "evidence_strength": "indirect",
       "evidence": [
-        "Dockerfile",
-        "docker-compose.yml"
+        {
+          "path": "docker-compose.yml",
+          "line": 6,
+          "snippet": "untrusted_workload: true",
+          "strength": "direct"
+        }
       ]
     }
   ],

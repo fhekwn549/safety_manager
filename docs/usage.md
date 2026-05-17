@@ -20,6 +20,22 @@ Codex:
 
 Both targets refuse to overwrite existing files unless `--force` is provided.
 
+## Use As Self-Review Extension
+
+Safety Manager is meant to extend Codex or Claude self-review, not replace it. Built-in self-review asks the model to reconsider its own work. Safety Manager adds an explicit rulebook, evidence requirements, structured findings, known limitations, and repeatable fixture evals.
+
+Use this flow after an agent writes or changes code:
+
+1. Ask the agent to run its normal self-review.
+2. Apply Safety Manager rules as an external review prompt layer.
+3. Require each finding to include `claim_type`, `confidence`, `evidence_strength`, path, line, and snippet when available.
+4. Treat missing evidence as review uncertainty, not proof of a vulnerability.
+5. Send the report to a human reviewer when evidence is weak, high-impact, or outside local repo context.
+
+Recommended wording:
+
+> Review this change using Safety Manager as a self-review extension. Do not claim exploitability. Report review signals with claim type, confidence, evidence strength, line/snippet evidence, missing evidence, and the next safe action.
+
 ## Build Mode
 
 Use Build Mode before and after new service or feature work.
@@ -45,6 +61,8 @@ Required sections:
 - Refactorability Scorecard
 - Recommended Remediation Strategy
 - Missing Evidence
+
+Findings separate severity from claim strength. Use `claim_type`, `confidence`, and `evidence_strength` so reviewers can distinguish direct evidence from risky patterns, inferred risk, and missing evidence.
 
 Include Runtime CVE Exposure when the repo runs Linux containers, self-hosted runners, build farms, or agent sandboxes where untrusted code shares a kernel.
 

@@ -67,6 +67,24 @@ test('review pack command writes public feedback bundle', async () => {
   assert.match(postDraft, /false positives/i);
   assert.match(postDraft, /actionability/i);
 
+  const feedback = await readFile(path.join(outputDir, 'feedback-template.md'), 'utf8');
+  assert.match(feedback, /False Positives \/ False Negatives/);
+  assert.match(feedback, /Reviewer verdict/);
+
+  const feedbackCsv = await readFile(path.join(outputDir, 'feedback-template.csv'), 'utf8');
+  assert.match(feedbackCsv, /reviewer_verdict/);
+  assert.match(feedbackCsv, /false_negative_risk_1_5/);
+
+  const evalReport = await readFile(path.join(outputDir, 'eval-report.md'), 'utf8');
+  assert.match(evalReport, /Coverage Matrix/);
+  assert.match(evalReport, /False Negative/);
+
+  const sampleReport = await readFile(path.join(outputDir, 'sample-reports', 'sample-expanded-risk.md'), 'utf8');
+  assert.match(sampleReport, /Claim type:/);
+  assert.match(sampleReport, /Confidence:/);
+  assert.match(sampleReport, /Evidence strength:/);
+  assert.match(sampleReport, /:[0-9]+ - /);
+
   const manifest = JSON.parse(await readFile(path.join(outputDir, 'manifest.json'), 'utf8'));
   assert.deepEqual(manifest.fixtures, [
     'sample-expanded-risk',

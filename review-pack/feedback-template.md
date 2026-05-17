@@ -16,11 +16,15 @@ Context reviewed:
 - Evidence that felt weak:
 - Missing evidence that should be requested:
 
-## False Positives
+## False Positives / False Negatives
 
 - Likely false positive:
 - Why:
 - Suggested wording or rule change:
+- Likely false negative:
+- Missing rule, pattern, or fixture:
+- Suggested evidence to catch it:
+- Reviewer verdict: true positive | false positive | false negative | unclear
 
 ## Actionability
 

@@ -109,6 +109,238 @@
       "score": 100
     }
   },
+  "ruleCoverage": {
+    "ASR-AGENT-001": {
+      "domain": "agent-config",
+      "expected": 1,
+      "actual": 1,
+      "truePositive": 1,
+      "falsePositive": 0,
+      "falseNegative": 0,
+      "recall": 1,
+      "precision": 1
+    },
+    "ASR-AGENT-002": {
+      "domain": "agent-config, sensitive-config",
+      "expected": 1,
+      "actual": 1,
+      "truePositive": 1,
+      "falsePositive": 0,
+      "falseNegative": 0,
+      "recall": 1,
+      "precision": 1
+    },
+    "ASR-AI-001": {
+      "domain": "data-privacy, agent-config",
+      "expected": 1,
+      "actual": 1,
+      "truePositive": 1,
+      "falsePositive": 0,
+      "falseNegative": 0,
+      "recall": 1,
+      "precision": 1
+    },
+    "ASR-AI-002": {
+      "domain": "data-privacy",
+      "expected": 1,
+      "actual": 1,
+      "truePositive": 1,
+      "falsePositive": 0,
+      "falseNegative": 0,
+      "recall": 1,
+      "precision": 1
+    },
+    "ASR-AI-003": {
+      "domain": "data-privacy, agent-config",
+      "expected": 1,
+      "actual": 1,
+      "truePositive": 1,
+      "falsePositive": 0,
+      "falseNegative": 0,
+      "recall": 1,
+      "precision": 1
+    },
+    "ASR-AI-004": {
+      "domain": "data-privacy, agent-config",
+      "expected": 1,
+      "actual": 1,
+      "truePositive": 1,
+      "falsePositive": 0,
+      "falseNegative": 0,
+      "recall": 1,
+      "precision": 1
+    },
+    "ASR-API-001": {
+      "domain": "api-contract",
+      "expected": 1,
+      "actual": 1,
+      "truePositive": 1,
+      "falsePositive": 0,
+      "falseNegative": 0,
+      "recall": 1,
+      "precision": 1
+    },
+    "ASR-API-002": {
+      "domain": "api-contract",
+      "expected": 1,
+      "actual": 1,
+      "truePositive": 1,
+      "falsePositive": 0,
+      "falseNegative": 0,
+      "recall": 1,
+      "precision": 1
+    },
+    "ASR-CI-001": {
+      "domain": "ci-cd",
+      "expected": 1,
+      "actual": 1,
+      "truePositive": 1,
+      "falsePositive": 0,
+      "falseNegative": 0,
+      "recall": 1,
+      "precision": 1
+    },
+    "ASR-CI-002": {
+      "domain": "ci-cd, sensitive-config",
+      "expected": 1,
+      "actual": 1,
+      "truePositive": 1,
+      "falsePositive": 0,
+      "falseNegative": 0,
+      "recall": 1,
+      "precision": 1
+    },
+    "ASR-CI-005": {
+      "domain": "ci-cd, docker-runtime",
+      "expected": 1,
+      "actual": 1,
+      "truePositive": 1,
+      "falsePositive": 0,
+      "falseNegative": 0,
+      "recall": 1,
+      "precision": 1
+    },
+    "ASR-DB-001": {
+      "domain": "database, payments-entitlements",
+      "expected": 1,
+      "actual": 1,
+      "truePositive": 1,
+      "falsePositive": 0,
+      "falseNegative": 0,
+      "recall": 1,
+      "precision": 1
+    },
+    "ASR-DOCKER-001": {
+      "domain": "docker-runtime",
+      "expected": 1,
+      "actual": 1,
+      "truePositive": 1,
+      "falsePositive": 0,
+      "falseNegative": 0,
+      "recall": 1,
+      "precision": 1
+    },
+    "ASR-DOCKER-002": {
+      "domain": "docker-runtime",
+      "expected": 1,
+      "actual": 1,
+      "truePositive": 1,
+      "falsePositive": 0,
+      "falseNegative": 0,
+      "recall": 1,
+      "precision": 1
+    },
+    "ASR-IAM-003": {
+      "domain": "cloud-iam",
+      "expected": 1,
+      "actual": 1,
+      "truePositive": 1,
+      "falsePositive": 0,
+      "falseNegative": 0,
+      "recall": 1,
+      "precision": 1
+    },
+    "ASR-IAM-004": {
+      "domain": "cloud-iam",
+      "expected": 1,
+      "actual": 1,
+      "truePositive": 1,
+      "falsePositive": 0,
+      "falseNegative": 0,
+      "recall": 1,
+      "precision": 1
+    },
+    "ASR-IAM-006": {
+      "domain": "cloud-iam",
+      "expected": 1,
+      "actual": 1,
+      "truePositive": 1,
+      "falsePositive": 0,
+      "falseNegative": 0,
+      "recall": 1,
+      "precision": 1
+    },
+    "ASR-LOCAL-001": {
+      "domain": "agent-config",
+      "expected": 1,
+      "actual": 1,
+      "truePositive": 1,
+      "falsePositive": 0,
+      "falseNegative": 0,
+      "recall": 1,
+      "precision": 1
+    },
+    "ASR-PAY-001": {
+      "domain": "payments-entitlements, database",
+      "expected": 1,
+      "actual": 1,
+      "truePositive": 1,
+      "falsePositive": 0,
+      "falseNegative": 0,
+      "recall": 1,
+      "precision": 1
+    },
+    "ASR-RUNTIME-001": {
+      "domain": "docker-runtime, ci-cd, agent-config",
+      "expected": 1,
+      "actual": 1,
+      "truePositive": 1,
+      "falsePositive": 0,
+      "falseNegative": 0,
+      "recall": 1,
+      "precision": 1
+    },
+    "ASR-SC-003": {
+      "domain": "supply-chain",
+      "expected": 1,
+      "actual": 1,
+      "truePositive": 1,
+      "falsePositive": 0,
+      "falseNegative": 0,
+      "recall": 1,
+      "precision": 1
+    },
+    "ASR-SC-004": {
+      "domain": "supply-chain",
+      "expected": 1,
+      "actual": 1,
+      "truePositive": 1,
+      "falsePositive": 0,
+      "falseNegative": 0,
+      "recall": 1,
+      "precision": 1
+    },
+    "ASR-SC-007": {
+      "domain": "supply-chain",
+      "expected": 1,
+      "actual": 1,
+      "truePositive": 1,
+      "falsePositive": 0,
+      "falseNegative": 0,
+      "recall": 1,
+      "precision": 1
+    }
+  },
   "cases": [
     {
       "name": "safe-basic-service",
@@ -141,9 +373,22 @@
             "payments-entitlements"
           ],
           "strategy": "Incremental Refactor with Human Checkpoints",
+          "claim_type": "confirmed_misconfiguration",
+          "confidence": "high",
+          "evidence_strength": "direct",
           "evidence": [
-            "payment.js",
-            "schema.sql"
+            {
+              "path": "payment.js",
+              "line": 2,
+              "snippet": "return payment.user_email;",
+              "strength": "direct"
+            },
+            {
+              "path": "schema.sql",
+              "line": 3,
+              "snippet": "payment_owner_email TEXT NOT NULL,",
+              "strength": "direct"
+            }
           ]
         },
         {
@@ -155,9 +400,22 @@
             "database"
           ],
           "strategy": "Incremental Refactor with Human Checkpoints",
+          "claim_type": "confirmed_misconfiguration",
+          "confidence": "high",
+          "evidence_strength": "direct",
           "evidence": [
-            "payment.js",
-            "schema.sql"
+            {
+              "path": "payment.js",
+              "line": 2,
+              "snippet": "return payment.user_email;",
+              "strength": "direct"
+            },
+            {
+              "path": "schema.sql",
+              "line": 3,
+              "snippet": "payment_owner_email TEXT NOT NULL,",
+              "strength": "direct"
+            }
           ]
         }
       ],
@@ -188,9 +446,16 @@
             "docker-runtime"
           ],
           "strategy": "Incremental Refactor",
+          "claim_type": "missing_evidence",
+          "confidence": "medium",
+          "evidence_strength": "missing",
           "evidence": [
-            "Dockerfile",
-            "docker-compose.yml"
+            {
+              "path": "Dockerfile",
+              "line": null,
+              "snippet": "Missing Evidence: no non-root USER directive found",
+              "strength": "missing"
+            }
           ]
         },
         {
@@ -201,9 +466,16 @@
             "docker-runtime"
           ],
           "strategy": "Human Architecture Review Required",
+          "claim_type": "confirmed_misconfiguration",
+          "confidence": "high",
+          "evidence_strength": "direct",
           "evidence": [
-            "Dockerfile",
-            "docker-compose.yml"
+            {
+              "path": "docker-compose.yml",
+              "line": 4,
+              "snippet": "privileged: true",
+              "strength": "direct"
+            }
           ]
         },
         {
@@ -216,9 +488,16 @@
             "agent-config"
           ],
           "strategy": "MIGRATION_PLAN_REQUIRED",
+          "claim_type": "needs_human_review",
+          "confidence": "medium",
+          "evidence_strength": "indirect",
           "evidence": [
-            "Dockerfile",
-            "docker-compose.yml"
+            {
+              "path": "docker-compose.yml",
+              "line": 6,
+              "snippet": "untrusted_workload: true",
+              "strength": "direct"
+            }
           ]
         }
       ],
@@ -249,8 +528,16 @@
             "api-contract"
           ],
           "strategy": "MIGRATION_PLAN_REQUIRED",
+          "claim_type": "risky_pattern",
+          "confidence": "high",
+          "evidence_strength": "direct",
           "evidence": [
-            "openapi.yaml"
+            {
+              "path": "openapi.yaml",
+              "line": 6,
+              "snippet": "- BREAKING_CHANGE",
+              "strength": "direct"
+            }
           ]
         },
         {
@@ -261,8 +548,16 @@
             "api-contract"
           ],
           "strategy": "MIGRATION_PLAN_REQUIRED",
+          "claim_type": "risky_pattern",
+          "confidence": "high",
+          "evidence_strength": "direct",
           "evidence": [
-            "openapi.yaml"
+            {
+              "path": "openapi.yaml",
+              "line": 8,
+              "snippet": "- error_shape_changed",
+              "strength": "direct"
+            }
           ]
         }
       ],
@@ -293,9 +588,22 @@
             "ci-cd"
           ],
           "strategy": "Incremental Refactor",
+          "claim_type": "confirmed_misconfiguration",
+          "confidence": "high",
+          "evidence_strength": "direct",
           "evidence": [
-            "workflow.yml",
-            "workflows/release.yml"
+            {
+              "path": "workflow.yml",
+              "line": 7,
+              "snippet": "permissions: write-all",
+              "strength": "direct"
+            },
+            {
+              "path": "workflows/release.yml",
+              "line": 5,
+              "snippet": "permissions: write-all",
+              "strength": "direct"
+            }
           ]
         },
         {
@@ -307,9 +615,22 @@
             "sensitive-config"
           ],
           "strategy": "Human Architecture Review Required",
+          "claim_type": "confirmed_misconfiguration",
+          "confidence": "high",
+          "evidence_strength": "direct",
           "evidence": [
-            "workflow.yml",
-            "workflows/release.yml"
+            {
+              "path": "workflow.yml",
+              "line": 3,
+              "snippet": "pull_request_target:",
+              "strength": "direct"
+            },
+            {
+              "path": "workflows/release.yml",
+              "line": 3,
+              "snippet": "pull_request_target:",
+              "strength": "direct"
+            }
           ]
         },
         {
@@ -321,9 +642,22 @@
             "docker-runtime"
           ],
           "strategy": "MIGRATION_PLAN_REQUIRED",
+          "claim_type": "confirmed_misconfiguration",
+          "confidence": "high",
+          "evidence_strength": "direct",
           "evidence": [
-            "workflow.yml",
-            "workflows/release.yml"
+            {
+              "path": "workflow.yml",
+              "line": 6,
+              "snippet": "runs-on: self-hosted",
+              "strength": "direct"
+            },
+            {
+              "path": "workflows/release.yml",
+              "line": 8,
+              "snippet": "runs-on: [self-hosted, linux]",
+              "strength": "direct"
+            }
           ]
         }
       ],
@@ -355,9 +689,22 @@
             "agent-config"
           ],
           "strategy": "Human Architecture Review Required",
+          "claim_type": "needs_human_review",
+          "confidence": "medium",
+          "evidence_strength": "indirect",
           "evidence": [
-            "AGENTS.md",
-            "agent/mcp.example.yaml"
+            {
+              "path": "AGENTS.md",
+              "line": 1,
+              "snippet": "Agent instruction or tool configuration file present",
+              "strength": "indirect"
+            },
+            {
+              "path": "agent/mcp.example.yaml",
+              "line": 1,
+              "snippet": "Agent instruction or tool configuration file present",
+              "strength": "indirect"
+            }
           ]
         },
         {
@@ -369,9 +716,22 @@
             "sensitive-config"
           ],
           "strategy": "Human Architecture Review Required",
+          "claim_type": "confirmed_misconfiguration",
+          "confidence": "high",
+          "evidence_strength": "direct",
           "evidence": [
-            "AGENTS.md",
-            "agent/mcp.example.yaml"
+            {
+              "path": "AGENTS.md",
+              "line": 4,
+              "snippet": "shell: true",
+              "strength": "direct"
+            },
+            {
+              "path": "agent/mcp.example.yaml",
+              "line": 2,
+              "snippet": "shell: true",
+              "strength": "direct"
+            }
           ]
         },
         {
@@ -382,9 +742,16 @@
             "agent-config"
           ],
           "strategy": "Human Architecture Review Required",
+          "claim_type": "confirmed_misconfiguration",
+          "confidence": "high",
+          "evidence_strength": "direct",
           "evidence": [
-            "AGENTS.md",
-            "agent/mcp.example.yaml"
+            {
+              "path": "AGENTS.md",
+              "line": 9,
+              "snippet": "weaken_baseline: true",
+              "strength": "direct"
+            }
           ]
         }
       ],
@@ -416,8 +783,16 @@
             "cloud-iam"
           ],
           "strategy": "Human Architecture Review Required",
+          "claim_type": "confirmed_misconfiguration",
+          "confidence": "high",
+          "evidence_strength": "direct",
           "evidence": [
-            "cloud-iam.yml"
+            {
+              "path": "cloud-iam.yml",
+              "line": 1,
+              "snippet": "service_account_reused_across_envs: true",
+              "strength": "direct"
+            }
           ]
         },
         {
@@ -428,8 +803,16 @@
             "cloud-iam"
           ],
           "strategy": "Human Architecture Review Required",
+          "claim_type": "missing_evidence",
+          "confidence": "medium",
+          "evidence_strength": "missing",
           "evidence": [
-            "cloud-iam.yml"
+            {
+              "path": "cloud-iam.yml",
+              "line": 2,
+              "snippet": "public_resource_policy_without_owner: true",
+              "strength": "direct"
+            }
           ]
         },
         {
@@ -440,8 +823,16 @@
             "cloud-iam"
           ],
           "strategy": "Incremental Refactor with Human Checkpoints",
+          "claim_type": "missing_evidence",
+          "confidence": "medium",
+          "evidence_strength": "missing",
           "evidence": [
-            "cloud-iam.yml"
+            {
+              "path": "cloud-iam.yml",
+              "line": 3,
+              "snippet": "break_glass_without_owner: true",
+              "strength": "direct"
+            }
           ]
         }
       ],
@@ -473,8 +864,16 @@
             "supply-chain"
           ],
           "strategy": "Incremental Refactor with Human Checkpoints",
+          "claim_type": "confirmed_misconfiguration",
+          "confidence": "high",
+          "evidence_strength": "direct",
           "evidence": [
-            "package.json"
+            {
+              "path": "package.json",
+              "line": 7,
+              "snippet": "\"dependency_lifecycle_scripts_unbounded\": true,",
+              "strength": "direct"
+            }
           ]
         },
         {
@@ -485,8 +884,16 @@
             "supply-chain"
           ],
           "strategy": "Human Architecture Review Required",
+          "claim_type": "confirmed_misconfiguration",
+          "confidence": "high",
+          "evidence_strength": "direct",
           "evidence": [
-            "package.json"
+            {
+              "path": "package.json",
+              "line": 8,
+              "snippet": "\"package_publishing_unprotected\": true,",
+              "strength": "direct"
+            }
           ]
         },
         {
@@ -497,8 +904,16 @@
             "supply-chain"
           ],
           "strategy": "Incremental Refactor with Human Checkpoints",
+          "claim_type": "risky_pattern",
+          "confidence": "high",
+          "evidence_strength": "direct",
           "evidence": [
-            "package.json"
+            {
+              "path": "package.json",
+              "line": 9,
+              "snippet": "\"dependency_confusion_risk\": true",
+              "strength": "direct"
+            }
           ]
         }
       ],
@@ -532,8 +947,16 @@
             "agent-config"
           ],
           "strategy": "Human Architecture Review Required",
+          "claim_type": "confirmed_misconfiguration",
+          "confidence": "high",
+          "evidence_strength": "direct",
           "evidence": [
-            "ai-data-policy.yml"
+            {
+              "path": "ai-data-policy.yml",
+              "line": 1,
+              "snippet": "ai_tenant_mix_without_isolation: true",
+              "strength": "direct"
+            }
           ]
         },
         {
@@ -544,8 +967,16 @@
             "data-privacy"
           ],
           "strategy": "Human Architecture Review Required",
+          "claim_type": "missing_evidence",
+          "confidence": "medium",
+          "evidence_strength": "missing",
           "evidence": [
-            "ai-data-policy.yml"
+            {
+              "path": "ai-data-policy.yml",
+              "line": 2,
+              "snippet": "training_without_opt_out: true",
+              "strength": "direct"
+            }
           ]
         },
         {
@@ -557,8 +988,16 @@
             "agent-config"
           ],
           "strategy": "Human Architecture Review Required",
+          "claim_type": "missing_evidence",
+          "confidence": "medium",
+          "evidence_strength": "missing",
           "evidence": [
-            "ai-data-policy.yml"
+            {
+              "path": "ai-data-policy.yml",
+              "line": 3,
+              "snippet": "high_impact_no_human_review: true",
+              "strength": "direct"
+            }
           ]
         },
         {
@@ -570,8 +1009,16 @@
             "agent-config"
           ],
           "strategy": "Incremental Refactor with Human Checkpoints",
+          "claim_type": "missing_evidence",
+          "confidence": "medium",
+          "evidence_strength": "missing",
           "evidence": [
-            "ai-data-policy.yml"
+            {
+              "path": "ai-data-policy.yml",
+              "line": 4,
+              "snippet": "tool_output_external_processor_no_boundary: true",
+              "strength": "direct"
+            }
           ]
         }
       ],

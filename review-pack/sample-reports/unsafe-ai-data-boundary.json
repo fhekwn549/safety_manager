@@ -23,8 +23,16 @@
         "agent-config"
       ],
       "strategy": "Human Architecture Review Required",
+      "claim_type": "confirmed_misconfiguration",
+      "confidence": "high",
+      "evidence_strength": "direct",
       "evidence": [
-        "ai-data-policy.yml"
+        {
+          "path": "ai-data-policy.yml",
+          "line": 1,
+          "snippet": "ai_tenant_mix_without_isolation: true",
+          "strength": "direct"
+        }
       ]
     },
     {
@@ -35,8 +43,16 @@
         "data-privacy"
       ],
       "strategy": "Human Architecture Review Required",
+      "claim_type": "missing_evidence",
+      "confidence": "medium",
+      "evidence_strength": "missing",
       "evidence": [
-        "ai-data-policy.yml"
+        {
+          "path": "ai-data-policy.yml",
+          "line": 2,
+          "snippet": "training_without_opt_out: true",
+          "strength": "direct"
+        }
       ]
     },
     {
@@ -48,8 +64,16 @@
         "agent-config"
       ],
       "strategy": "Human Architecture Review Required",
+      "claim_type": "missing_evidence",
+      "confidence": "medium",
+      "evidence_strength": "missing",
       "evidence": [
-        "ai-data-policy.yml"
+        {
+          "path": "ai-data-policy.yml",
+          "line": 3,
+          "snippet": "high_impact_no_human_review: true",
+          "strength": "direct"
+        }
       ]
     },
     {
@@ -61,8 +85,16 @@
         "agent-config"
       ],
       "strategy": "Incremental Refactor with Human Checkpoints",
+      "claim_type": "missing_evidence",
+      "confidence": "medium",
+      "evidence_strength": "missing",
       "evidence": [
-        "ai-data-policy.yml"
+        {
+          "path": "ai-data-policy.yml",
+          "line": 4,
+          "snippet": "tool_output_external_processor_no_boundary: true",
+          "strength": "direct"
+        }
       ]
     }
   ],

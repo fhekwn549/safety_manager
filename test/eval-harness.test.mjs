@@ -12,4 +12,7 @@ test('runEvaluation scores benchmark fixtures with precision, recall, and verdic
   assert.equal(result.metrics.precision, 1);
   assert.equal(result.metrics.verdictAccuracy, 1);
   assert.equal(result.score.overall, 100);
+  assert.ok(result.ruleCoverage['ASR-DOCKER-001']);
+  assert.equal(result.ruleCoverage['ASR-DOCKER-001'].expected, 1);
+  assert.equal(result.ruleCoverage['ASR-DOCKER-001'].truePositive, 1);
 });

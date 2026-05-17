@@ -116,6 +116,8 @@ function verdictFor(findings) {
 
 function evidenceMatches(ruleId, file) {
   const searchable = `${file.path}\n${file.content}`;
+  if (ruleId === 'ASR-DOCKER-001') return file.path === 'Dockerfile';
+  if (ruleId === 'ASR-AGENT-001') return /AGENTS\.md|SKILL\.md|mcp|plugin/.test(file.path);
   if (ruleId.startsWith('ASR-DB') || ruleId.startsWith('ASR-PAY')) return /schema|payment|owner_email/.test(searchable);
   if (ruleId.startsWith('ASR-DOCKER') || ruleId === 'ASR-RUNTIME-001') return /Dockerfile|compose|runtime|shared_kernel|privileged/.test(searchable);
   if (ruleId.startsWith('ASR-API')) return /openapi|api|BREAKING_CHANGE|error_shape/.test(searchable);
@@ -127,10 +129,125 @@ function evidenceMatches(ruleId, file) {
   return false;
 }
 
+function evidencePattern(ruleId) {
+  if (ruleId.startsWith('ASR-DB') || ruleId.startsWith('ASR-PAY')) return /owner_email|payment_owner_email|user_email/;
+  if (ruleId === 'ASR-DOCKER-001') return null;
+  if (ruleId === 'ASR-DOCKER-002') return /privileged:\s*true|--privileged|docker\.sock|hostPath:/;
+  if (ruleId === 'ASR-RUNTIME-001') return /untrusted_workload:\s*true|shared_kernel:\s*true/;
+  if (ruleId === 'ASR-API-001') return /BREAKING_CHANGE|removed field|removed enum|required field added/;
+  if (ruleId === 'ASR-API-002') return /error_shape_changed|error schema changed|renamed error code/;
+  if (ruleId === 'ASR-CI-001') return /permissions:\s*write-all|contents:\s*write|actions:\s*write/;
+  if (ruleId === 'ASR-CI-002') return /pull_request_target|SENSITIVE_ENV_AVAILABLE/;
+  if (ruleId === 'ASR-CI-005') return /self-hosted|shared_kernel_runner:\s*true/;
+  if (ruleId === 'ASR-AGENT-001') return /AGENTS\.md|SKILL\.md|mcp|plugin/;
+  if (ruleId === 'ASR-AGENT-002') return /shell:\s*true|network:\s*true|filesystem_write:\s*true|credential_access:\s*true/;
+  if (ruleId === 'ASR-LOCAL-001') return /weaken_baseline:\s*true|ignore baseline|baseline rules may be skipped/i;
+  if (ruleId === 'ASR-IAM-003') return /service_account_reused_across_envs:\s*true/;
+  if (ruleId === 'ASR-IAM-004') return /public_resource_policy_without_owner:\s*true/;
+  if (ruleId === 'ASR-IAM-006') return /break_glass_without_owner:\s*true/;
+  if (ruleId === 'ASR-SC-003') return /dependency_lifecycle_scripts_unbounded/;
+  if (ruleId === 'ASR-SC-004') return /package_publishing_unprotected/;
+  if (ruleId === 'ASR-SC-007') return /dependency_confusion_risk/;
+  if (ruleId === 'ASR-AI-001') return /ai_tenant_mix_without_isolation:\s*true/;
+  if (ruleId === 'ASR-AI-002') return /training_without_opt_out:\s*true/;
+  if (ruleId === 'ASR-AI-003') return /high_impact_no_human_review:\s*true/;
+  if (ruleId === 'ASR-AI-004') return /tool_output_external_processor_no_boundary:\s*true/;
+  return null;
+}
+
+function firstMatchingLine(content, pattern) {
+  if (!pattern) return null;
+  const lines = content.split(/\r?\n/);
+  const index = lines.findIndex((line) => pattern.test(line));
+  if (index === -1) return null;
+  return {
+    line: index + 1,
+    snippet: lines[index].trim(),
+  };
+}
+
+function claimTypeFor(ruleId) {
+  if (ruleId === 'ASR-DOCKER-001') return 'missing_evidence';
+  if (ruleId === 'ASR-RUNTIME-001') return 'needs_human_review';
+  if (ruleId === 'ASR-AGENT-001') return 'needs_human_review';
+  if (['ASR-IAM-004', 'ASR-IAM-006', 'ASR-AI-002', 'ASR-AI-003', 'ASR-AI-004'].includes(ruleId)) {
+    return 'missing_evidence';
+  }
+  if (['ASR-API-001', 'ASR-API-002', 'ASR-SC-007'].includes(ruleId)) return 'risky_pattern';
+  return 'confirmed_misconfiguration';
+}
+
+function confidenceFor(claimType, evidence) {
+  if (claimType === 'missing_evidence' || claimType === 'needs_human_review') return 'medium';
+  return evidence.some((item) => item.line !== null) ? 'high' : 'medium';
+}
+
+function evidenceStrengthFor(claimType, evidence) {
+  if (claimType === 'missing_evidence') return 'missing';
+  if (claimType === 'needs_human_review') return 'indirect';
+  return evidence.some((item) => item.line !== null) ? 'direct' : 'indirect';
+}
+
+function evidenceEntry(ruleId, file) {
+  if (ruleId === 'ASR-AGENT-001') {
+    return {
+      path: file.path,
+      line: 1,
+      snippet: 'Agent instruction or tool configuration file present',
+      strength: 'indirect',
+    };
+  }
+  const match = firstMatchingLine(file.content, evidencePattern(ruleId));
+  if (!match) {
+    return {
+      path: file.path,
+      line: null,
+      snippet: ruleId === 'ASR-DOCKER-001'
+        ? 'Missing Evidence: no non-root USER directive found'
+        : 'Missing Evidence: exact matching line not identified',
+      strength: 'missing',
+    };
+  }
+  return {
+    path: file.path,
+    line: match.line,
+    snippet: match.snippet,
+    strength: 'direct',
+  };
+}
+
+function formatEvidenceEntry(entry) {
+  if (!entry.path) return entry.snippet;
+  if (entry.line === null) return `${entry.path}: ${entry.snippet}`;
+  return `${entry.path}:${entry.line} - ${entry.snippet}`;
+}
+
 function findingFromRule(ruleId, files) {
   const [title, severity, domains, strategy] = findingCatalog[ruleId];
-  const evidence = files.filter((file) => evidenceMatches(ruleId, file)).map((file) => file.path);
-  return { ruleId, title, severity, domains, strategy, evidence: evidence.length > 0 ? evidence : ['Missing Evidence: exact source path not identified'] };
+  const rawEvidence = files.filter((file) => evidenceMatches(ruleId, file)).map((file) => evidenceEntry(ruleId, file));
+  const directEvidence = rawEvidence.filter((item) => item.line !== null);
+  const evidence = directEvidence.length > 0 ? directEvidence : rawEvidence;
+  const normalizedEvidence = evidence.length > 0
+    ? evidence
+    : [{
+      path: null,
+      line: null,
+      snippet: 'Missing Evidence: exact source path not identified',
+      strength: 'missing',
+    }];
+  const claim_type = claimTypeFor(ruleId);
+  const evidence_strength = evidenceStrengthFor(claim_type, normalizedEvidence);
+  return {
+    ruleId,
+    title,
+    severity,
+    domains,
+    strategy,
+    claim_type,
+    confidence: confidenceFor(claim_type, normalizedEvidence),
+    evidence_strength,
+    evidence: normalizedEvidence,
+  };
 }
 
 function remediationStrategy(verdict, findings) {
@@ -218,10 +335,13 @@ function buildReport({ fixtureName, verdict, findings }) {
 
 Severity: ${finding.severity}
 Decision: ${verdict}
+Claim type: ${finding.claim_type}
+Confidence: ${finding.confidence}
+Evidence strength: ${finding.evidence_strength}
 Affected domains: ${finding.domains.join(', ')}
 Blast radius: ${finding.severity === 'critical' ? 'system' : 'module'}
 Evidence:
-${finding.evidence.map((item) => `- ${item}`).join('\n')}
+${finding.evidence.map((item) => `- ${formatEvidenceEntry(item)}`).join('\n')}
 Reasoning:
 - Fixture evidence matches ${finding.ruleId}.
 Required action:

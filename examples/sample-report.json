@@ -26,9 +26,16 @@
         "docker-runtime"
       ],
       "strategy": "Incremental Refactor",
+      "claim_type": "missing_evidence",
+      "confidence": "medium",
+      "evidence_strength": "missing",
       "evidence": [
-        "Dockerfile",
-        "docker-compose.yml"
+        {
+          "path": "Dockerfile",
+          "line": null,
+          "snippet": "Missing Evidence: no non-root USER directive found",
+          "strength": "missing"
+        }
       ]
     },
     {
@@ -39,9 +46,16 @@
         "docker-runtime"
       ],
       "strategy": "Human Architecture Review Required",
+      "claim_type": "confirmed_misconfiguration",
+      "confidence": "high",
+      "evidence_strength": "direct",
       "evidence": [
-        "Dockerfile",
-        "docker-compose.yml"
+        {
+          "path": "docker-compose.yml",
+          "line": 4,
+          "snippet": "privileged: true",
+          "strength": "direct"
+        }
       ]
     },
     {
@@ -54,9 +68,16 @@
         "agent-config"
       ],
       "strategy": "MIGRATION_PLAN_REQUIRED",
+      "claim_type": "needs_human_review",
+      "confidence": "medium",
+      "evidence_strength": "indirect",
       "evidence": [
-        "Dockerfile",
-        "docker-compose.yml"
+        {
+          "path": "docker-compose.yml",
+          "line": 6,
+          "snippet": "untrusted_workload: true",
+          "strength": "direct"
+        }
       ]
     },
     {
@@ -67,8 +88,16 @@
         "cloud-iam"
       ],
       "strategy": "Human Architecture Review Required",
+      "claim_type": "confirmed_misconfiguration",
+      "confidence": "high",
+      "evidence_strength": "direct",
       "evidence": [
-        "cloud-iam.yml"
+        {
+          "path": "cloud-iam.yml",
+          "line": 1,
+          "snippet": "service_account_reused_across_envs: true",
+          "strength": "direct"
+        }
       ]
     },
     {
@@ -79,8 +108,16 @@
         "cloud-iam"
       ],
       "strategy": "Human Architecture Review Required",
+      "claim_type": "missing_evidence",
+      "confidence": "medium",
+      "evidence_strength": "missing",
       "evidence": [
-        "cloud-iam.yml"
+        {
+          "path": "cloud-iam.yml",
+          "line": 2,
+          "snippet": "public_resource_policy_without_owner: true",
+          "strength": "direct"
+        }
       ]
     },
     {
@@ -91,8 +128,16 @@
         "cloud-iam"
       ],
       "strategy": "Incremental Refactor with Human Checkpoints",
+      "claim_type": "missing_evidence",
+      "confidence": "medium",
+      "evidence_strength": "missing",
       "evidence": [
-        "cloud-iam.yml"
+        {
+          "path": "cloud-iam.yml",
+          "line": 3,
+          "snippet": "break_glass_without_owner: true",
+          "strength": "direct"
+        }
       ]
     },
     {
@@ -103,8 +148,16 @@
         "supply-chain"
       ],
       "strategy": "Incremental Refactor with Human Checkpoints",
+      "claim_type": "confirmed_misconfiguration",
+      "confidence": "high",
+      "evidence_strength": "direct",
       "evidence": [
-        "package.json"
+        {
+          "path": "package.json",
+          "line": 4,
+          "snippet": "\"dependency_lifecycle_scripts_unbounded\": true,",
+          "strength": "direct"
+        }
       ]
     },
     {
@@ -115,8 +168,16 @@
         "supply-chain"
       ],
       "strategy": "Human Architecture Review Required",
+      "claim_type": "confirmed_misconfiguration",
+      "confidence": "high",
+      "evidence_strength": "direct",
       "evidence": [
-        "package.json"
+        {
+          "path": "package.json",
+          "line": 5,
+          "snippet": "\"package_publishing_unprotected\": true,",
+          "strength": "direct"
+        }
       ]
     },
     {
@@ -127,8 +188,16 @@
         "supply-chain"
       ],
       "strategy": "Incremental Refactor with Human Checkpoints",
+      "claim_type": "risky_pattern",
+      "confidence": "high",
+      "evidence_strength": "direct",
       "evidence": [
-        "package.json"
+        {
+          "path": "package.json",
+          "line": 6,
+          "snippet": "\"dependency_confusion_risk\": true",
+          "strength": "direct"
+        }
       ]
     },
     {
@@ -140,8 +209,16 @@
         "agent-config"
       ],
       "strategy": "Human Architecture Review Required",
+      "claim_type": "confirmed_misconfiguration",
+      "confidence": "high",
+      "evidence_strength": "direct",
       "evidence": [
-        "ai-data-policy.yml"
+        {
+          "path": "ai-data-policy.yml",
+          "line": 1,
+          "snippet": "ai_tenant_mix_without_isolation: true",
+          "strength": "direct"
+        }
       ]
     },
     {
@@ -152,8 +229,16 @@
         "data-privacy"
       ],
       "strategy": "Human Architecture Review Required",
+      "claim_type": "missing_evidence",
+      "confidence": "medium",
+      "evidence_strength": "missing",
       "evidence": [
-        "ai-data-policy.yml"
+        {
+          "path": "ai-data-policy.yml",
+          "line": 2,
+          "snippet": "training_without_opt_out: true",
+          "strength": "direct"
+        }
       ]
     },
     {
@@ -165,8 +250,16 @@
         "agent-config"
       ],
       "strategy": "Human Architecture Review Required",
+      "claim_type": "missing_evidence",
+      "confidence": "medium",
+      "evidence_strength": "missing",
       "evidence": [
-        "ai-data-policy.yml"
+        {
+          "path": "ai-data-policy.yml",
+          "line": 3,
+          "snippet": "high_impact_no_human_review: true",
+          "strength": "direct"
+        }
       ]
     },
     {
@@ -178,8 +271,16 @@
         "agent-config"
       ],
       "strategy": "Incremental Refactor with Human Checkpoints",
+      "claim_type": "missing_evidence",
+      "confidence": "medium",
+      "evidence_strength": "missing",
       "evidence": [
-        "ai-data-policy.yml"
+        {
+          "path": "ai-data-policy.yml",
+          "line": 4,
+          "snippet": "tool_output_external_processor_no_boundary: true",
+          "strength": "direct"
+        }
       ]
     }
   ],

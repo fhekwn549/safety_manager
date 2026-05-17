@@ -77,6 +77,10 @@ test('report schema includes scorecard and remediation output sections', async (
   ]) {
     assert.match(schema, new RegExp(heading));
   }
+  assert.match(schema, /claim_type/);
+  assert.match(schema, /confidence/);
+  assert.match(schema, /evidence_strength/);
+  assert.match(schema, /snippet/);
 });
 
 test('domain score modifiers define additive modifiers and hard triggers', async () => {

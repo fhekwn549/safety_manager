@@ -44,6 +44,8 @@ test('usage guide explains Build Mode, Audit Mode, reports, and install examples
 
   assert.match(usage, /Build Mode/);
   assert.match(usage, /Audit Mode/);
+  assert.match(usage, /Use As Self-Review Extension/);
+  assert.match(usage, /claim_type/);
   assert.match(usage, /Generic markdown/);
   assert.match(usage, /Codex/);
   assert.match(usage, /Report/);

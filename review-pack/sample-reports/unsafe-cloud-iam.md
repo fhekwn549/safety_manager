@@ -19,10 +19,13 @@ Fixture: unsafe-cloud-iam
 
 Severity: critical
 Decision: BLOCK
+Claim type: confirmed_misconfiguration
+Confidence: high
+Evidence strength: direct
 Affected domains: cloud-iam
 Blast radius: system
 Evidence:
-- cloud-iam.yml
+- cloud-iam.yml:1 - service_account_reused_across_envs: true
 Reasoning:
 - Fixture evidence matches ASR-IAM-003.
 Required action:
@@ -32,10 +35,13 @@ Required action:
 
 Severity: critical
 Decision: BLOCK
+Claim type: missing_evidence
+Confidence: medium
+Evidence strength: missing
 Affected domains: cloud-iam
 Blast radius: system
 Evidence:
-- cloud-iam.yml
+- cloud-iam.yml:2 - public_resource_policy_without_owner: true
 Reasoning:
 - Fixture evidence matches ASR-IAM-004.
 Required action:
@@ -45,10 +51,13 @@ Required action:
 
 Severity: high
 Decision: BLOCK
+Claim type: missing_evidence
+Confidence: medium
+Evidence strength: missing
 Affected domains: cloud-iam
 Blast radius: module
 Evidence:
-- cloud-iam.yml
+- cloud-iam.yml:3 - break_glass_without_owner: true
 Reasoning:
 - Fixture evidence matches ASR-IAM-006.
 Required action:
