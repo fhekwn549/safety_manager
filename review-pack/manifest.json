@@ -10,6 +10,7 @@
   ],
   "files": [
     "README.md",
+    "code-quality-rubric.md",
     "eval-report.json",
     "eval-report.md",
     "feedback-template.csv",

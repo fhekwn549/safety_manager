@@ -26,6 +26,7 @@ npm run review-pack
 - `eval-report.md`: benchmark behavior on labeled fixtures.
 - `known-limitations.md`: current boundaries and failure modes.
 - `reviewer-rubric.md`: scoring rubric for reviewers.
+- `code-quality-rubric.md`: implementation-quality review checklist for maintainability signals.
 - `feedback-template.md`: structured feedback form.
 - `feedback-template.csv`: spreadsheet-friendly feedback form.
 - `post-draft.md`: draft community post.

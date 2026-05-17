@@ -23,6 +23,7 @@ test('review pack command writes public feedback bundle', async () => {
     'README.md',
     'known-limitations.md',
     'reviewer-rubric.md',
+    'code-quality-rubric.md',
     'feedback-template.md',
     'feedback-template.csv',
     'eval-report.md',
@@ -51,6 +52,14 @@ test('review pack command writes public feedback bundle', async () => {
   assert.match(limitations, /not a vulnerability scanner/i);
   assert.match(limitations, /false positives/i);
 
+  const codeQualityRubric = await readFile(path.join(outputDir, 'code-quality-rubric.md'), 'utf8');
+  assert.match(codeQualityRubric, /Code Quality Rubric/);
+  assert.match(codeQualityRubric, /naming/i);
+  assert.match(codeQualityRubric, /function size/i);
+  assert.match(codeQualityRubric, /duplication/i);
+  assert.match(codeQualityRubric, /tests/i);
+  assert.match(codeQualityRubric, /Not A Style Gate/);
+
   const postDraft = await readFile(path.join(outputDir, 'post-draft.md'), 'utf8');
   assert.match(postDraft, /I built an experimental safety review tool for agentic coding projects and need brutally honest feedback/);
   assert.match(postDraft, /finding usefulness/i);
@@ -68,13 +77,14 @@ test('review pack command writes public feedback bundle', async () => {
     'safe-basic-service',
   ]);
   assert.ok(manifest.files.includes('manifest.json'));
+  assert.ok(manifest.files.includes('code-quality-rubric.md'));
   assert.ok(manifest.files.includes('sample-reports/sample-expanded-risk.md'));
 
   const allText = await Promise.all([
     ...requiredFiles.map((file) => readFile(path.join(outputDir, file), 'utf8')),
     ...sampleReports.map((file) => readFile(path.join(outputDir, 'sample-reports', file), 'utf8')),
   ]);
-  assert.doesNotMatch(allText.join('\n'), /\/home\/|fhekwn549|safety_manager/);
+  assert.doesNotMatch(allText.join('\n'), /\/home\/|BEGIN [A-Z ]*PRIVATE KEY|password\s*[:=]|secret\s*[:=]/);
 });
 
 test('review pack command accepts a custom fixture list', async () => {

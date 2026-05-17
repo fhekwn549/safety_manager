@@ -13,6 +13,11 @@ const defaultFixtures = [
   'safe-basic-service',
 ];
 
+const repoUrl = 'https://github.com/fhekwn549/safety_manager';
+const sampleReportUrl = `${repoUrl}/blob/main/review-pack/sample-reports/sample-expanded-risk.md`;
+const rubricUrl = `${repoUrl}/blob/main/review-pack/reviewer-rubric.md`;
+const codeQualityRubricUrl = `${repoUrl}/blob/main/review-pack/code-quality-rubric.md`;
+
 function parseArgs(argv) {
   const parsed = {
     output: 'review-pack',
@@ -100,6 +105,7 @@ npm run review-pack
 - \`eval-report.md\`: benchmark behavior on labeled fixtures.
 - \`known-limitations.md\`: current boundaries and failure modes.
 - \`reviewer-rubric.md\`: scoring rubric for reviewers.
+- \`code-quality-rubric.md\`: implementation-quality review checklist for maintainability signals.
 - \`feedback-template.md\`: structured feedback form.
 - \`feedback-template.csv\`: spreadsheet-friendly feedback form.
 - \`post-draft.md\`: draft community post.
@@ -107,6 +113,39 @@ npm run review-pack
 ## Scope
 
 Safety Manager looks for review signals in repo evidence and rulebook overlays. It does not prove exploitability or replace human review. Treat every finding as a prompt for evidence-based review.
+`;
+}
+
+function codeQualityRubric() {
+  return `# Code Quality Rubric
+
+This rubric adds implementation-quality review to the safety review pack. It is inspired by common clean-coding and maintainability principles, but it does not quote or require any specific book or style guide.
+
+Score each area from 1 to 5.
+
+| Area | 1 | 3 | 5 |
+| --- | --- | --- | --- |
+| Naming | Names hide intent or overload domain terms | Mostly clear with some ambiguous names | Names reveal intent and match domain language |
+| Function size | Large mixed-purpose functions | Some functions do multiple jobs | Small cohesive functions with one clear job |
+| Duplication | Same logic repeated across paths | Some repeated patterns | Shared behavior is factored without hiding clarity |
+| Control flow | Deep nesting or surprising paths | Mostly readable | Simple predictable flow and early exits where useful |
+| Error handling | Silent failure or unclear recovery | Some errors surfaced | Errors are explicit, actionable, and tested |
+| Boundary clarity | Business logic mixed with IO/framework concerns | Partial separation | Domain logic, IO, config, and adapters are easy to distinguish |
+| Tests | No meaningful behavior tests | Main path covered | Behavior, edge cases, and regression risks covered |
+| Change safety | Small changes require broad edits | Moderate blast radius | Local changes are easy to reason about and verify |
+
+## Reviewer Questions
+
+- Which code path was hardest to understand quickly?
+- Which name, function, or module should be changed first?
+- Where is duplication hiding a missing abstraction?
+- Where does the implementation mix business rules with IO, CLI, filesystem, network, or framework details?
+- Which behavior needs a regression test before the next refactor?
+- Which recommendation would improve maintainability without turning into subjective style policing?
+
+## Not A Style Gate
+
+Do not use this rubric to enforce personal formatting preferences. Use it to find maintainability risks that affect review confidence, future changes, and testability.
 `;
 }
 
@@ -238,12 +277,14 @@ npm run review-pack
 - Evidence credibility: does the cited evidence justify the conclusion?
 - False positives: what would create noise in real repos?
 - Actionability: is the recommended next step specific enough?
+- Code quality: do the implementation-quality checks catch maintainability issues without becoming subjective style noise?
 
 Links:
 
-- GitHub repo: TODO
-- Sample report: TODO
-- Review rubric: TODO
+- GitHub repo: ${repoUrl}
+- Sample report: ${sampleReportUrl}
+- Review rubric: ${rubricUrl}
+- Code quality rubric: ${codeQualityRubricUrl}
 `;
 }
 
@@ -259,6 +300,7 @@ async function buildReviewPack({ output, fixtures, clean }) {
   await writeText(outputRoot, 'README.md', readme(fixtures), files);
   await writeText(outputRoot, 'known-limitations.md', knownLimitations(), files);
   await writeText(outputRoot, 'reviewer-rubric.md', reviewerRubric(), files);
+  await writeText(outputRoot, 'code-quality-rubric.md', codeQualityRubric(), files);
   await writeText(outputRoot, 'feedback-template.md', feedbackTemplate(), files);
   await writeText(outputRoot, 'feedback-template.csv', feedbackCsv(), files);
   await writeText(outputRoot, 'post-draft.md', postDraft(), files);

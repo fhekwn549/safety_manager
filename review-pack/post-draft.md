@@ -32,9 +32,11 @@ npm run review-pack
 - Evidence credibility: does the cited evidence justify the conclusion?
 - False positives: what would create noise in real repos?
 - Actionability: is the recommended next step specific enough?
+- Code quality: do the implementation-quality checks catch maintainability issues without becoming subjective style noise?
 
 Links:
 
-- GitHub repo: TODO
-- Sample report: TODO
-- Review rubric: TODO
+- GitHub repo: https://github.com/fhekwn549/safety_manager
+- Sample report: https://github.com/fhekwn549/safety_manager/blob/main/review-pack/sample-reports/sample-expanded-risk.md
+- Review rubric: https://github.com/fhekwn549/safety_manager/blob/main/review-pack/reviewer-rubric.md
+- Code quality rubric: https://github.com/fhekwn549/safety_manager/blob/main/review-pack/code-quality-rubric.md
