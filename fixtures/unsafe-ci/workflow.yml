@@ -1,0 +1,10 @@
+name: unsafe
+on:
+  pull_request_target:
+jobs:
+  build:
+    runs-on: self-hosted
+    permissions: write-all
+    env:
+      SENSITIVE_ENV_AVAILABLE: true
+      shared_kernel_runner: true

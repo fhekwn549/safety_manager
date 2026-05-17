@@ -1,0 +1,7 @@
+services:
+  agent:
+    build: .
+    privileged: true
+    environment:
+      untrusted_workload: true
+      shared_kernel: true

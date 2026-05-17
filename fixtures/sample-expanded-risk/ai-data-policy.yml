@@ -1,0 +1,4 @@
+ai_tenant_mix_without_isolation: true
+training_without_opt_out: true
+high_impact_no_human_review: true
+tool_output_external_processor_no_boundary: true

@@ -1,0 +1,41 @@
+{
+  "verdict": "PASS",
+  "mode": "Audit Mode",
+  "scope": [
+    "fixture"
+  ],
+  "subject": "safe-basic-service",
+  "summary": {
+    "currentWork": "fixture self-test",
+    "baselineRulesLoaded": true,
+    "referenceOverlaysLoaded": true,
+    "repoLocalConventionsReviewed": true,
+    "externalScannerEvidence": "not provided"
+  },
+  "findings": [],
+  "scorecard": {
+    "axes": {
+      "coreInvariantDamage": 0,
+      "blastRadius": 1,
+      "migrationRisk": 1,
+      "testability": 1,
+      "boundaryClarity": 1,
+      "operationalEvidence": 0
+    },
+    "commonScore": "fixture-derived",
+    "domainModifiers": [],
+    "hardTriggers": [],
+    "finalScore": "fixture-derived"
+  },
+  "remediation": {
+    "strategy": "Incremental Refactor",
+    "why": [
+      "Based on fixture findings and hard triggers."
+    ],
+    "nextSafeAction": "Keep this fixture outcome stable when editing rules."
+  },
+  "runtimeCveExposure": null,
+  "missingEvidence": [
+    "No missing evidence for this safe fixture."
+  ]
+}

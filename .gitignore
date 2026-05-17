@@ -1,0 +1,10 @@
+node_modules/
+tmp/
+coverage/
+dist/
+build/
+
+# Internal planning and development records are kept local unless explicitly published.
+docs/issues/
+docs/product/
+docs/superpowers/

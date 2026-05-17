@@ -1,0 +1,7 @@
+services:
+  worker:
+    build: .
+    privileged: true
+    environment:
+      untrusted_workload: true
+      shared_kernel: true

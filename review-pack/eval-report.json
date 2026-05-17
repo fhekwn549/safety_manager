@@ -1,0 +1,589 @@
+{
+  "summary": {
+    "caseCount": 9,
+    "expectedFindingCount": 23,
+    "actualFindingCount": 23,
+    "truePositiveCount": 23,
+    "falsePositiveCount": 0,
+    "falseNegativeCount": 0,
+    "verdictMatchCount": 9
+  },
+  "metrics": {
+    "recall": 1,
+    "precision": 1,
+    "verdictAccuracy": 1,
+    "evidenceQuality": 1,
+    "actionability": 1,
+    "domainCoverage": 1
+  },
+  "score": {
+    "weights": {
+      "recall": 25,
+      "precision": 20,
+      "verdictAccuracy": 15,
+      "evidenceQuality": 15,
+      "actionability": 15,
+      "domainCoverage": 10
+    },
+    "overall": 100
+  },
+  "domainScores": {
+    "agent-config": {
+      "expected": 7,
+      "actual": 7,
+      "truePositive": 7,
+      "recall": 1,
+      "precision": 1,
+      "score": 100
+    },
+    "api-contract": {
+      "expected": 2,
+      "actual": 2,
+      "truePositive": 2,
+      "recall": 1,
+      "precision": 1,
+      "score": 100
+    },
+    "ci-cd": {
+      "expected": 4,
+      "actual": 4,
+      "truePositive": 4,
+      "recall": 1,
+      "precision": 1,
+      "score": 100
+    },
+    "cloud-iam": {
+      "expected": 3,
+      "actual": 3,
+      "truePositive": 3,
+      "recall": 1,
+      "precision": 1,
+      "score": 100
+    },
+    "data-privacy": {
+      "expected": 4,
+      "actual": 4,
+      "truePositive": 4,
+      "recall": 1,
+      "precision": 1,
+      "score": 100
+    },
+    "database": {
+      "expected": 2,
+      "actual": 2,
+      "truePositive": 2,
+      "recall": 1,
+      "precision": 1,
+      "score": 100
+    },
+    "docker-runtime": {
+      "expected": 4,
+      "actual": 4,
+      "truePositive": 4,
+      "recall": 1,
+      "precision": 1,
+      "score": 100
+    },
+    "payments-entitlements": {
+      "expected": 2,
+      "actual": 2,
+      "truePositive": 2,
+      "recall": 1,
+      "precision": 1,
+      "score": 100
+    },
+    "sensitive-config": {
+      "expected": 2,
+      "actual": 2,
+      "truePositive": 2,
+      "recall": 1,
+      "precision": 1,
+      "score": 100
+    },
+    "supply-chain": {
+      "expected": 3,
+      "actual": 3,
+      "truePositive": 3,
+      "recall": 1,
+      "precision": 1,
+      "score": 100
+    }
+  },
+  "cases": [
+    {
+      "name": "safe-basic-service",
+      "repo": "fixtures/safe-basic-service",
+      "expectedVerdict": "PASS",
+      "actualVerdict": "PASS",
+      "expectedFindings": [],
+      "actualFindings": [],
+      "truePositiveFindings": [],
+      "falseNegativeFindings": [],
+      "falsePositiveFindings": [],
+      "passed": true
+    },
+    {
+      "name": "bad-identity-payment",
+      "repo": "fixtures/bad-identity-payment",
+      "expectedVerdict": "BLOCK",
+      "actualVerdict": "BLOCK",
+      "expectedFindings": [
+        "ASR-DB-001",
+        "ASR-PAY-001"
+      ],
+      "actualFindings": [
+        {
+          "ruleId": "ASR-DB-001",
+          "title": "Mutable external claim used as ownership key",
+          "severity": "critical",
+          "domains": [
+            "database",
+            "payments-entitlements"
+          ],
+          "strategy": "Incremental Refactor with Human Checkpoints",
+          "evidence": [
+            "payment.js",
+            "schema.sql"
+          ]
+        },
+        {
+          "ruleId": "ASR-PAY-001",
+          "title": "Payment ownership uses mutable identifier",
+          "severity": "critical",
+          "domains": [
+            "payments-entitlements",
+            "database"
+          ],
+          "strategy": "Incremental Refactor with Human Checkpoints",
+          "evidence": [
+            "payment.js",
+            "schema.sql"
+          ]
+        }
+      ],
+      "truePositiveFindings": [
+        "ASR-DB-001",
+        "ASR-PAY-001"
+      ],
+      "falseNegativeFindings": [],
+      "falsePositiveFindings": [],
+      "passed": true
+    },
+    {
+      "name": "unsafe-docker",
+      "repo": "fixtures/unsafe-docker",
+      "expectedVerdict": "BLOCK",
+      "actualVerdict": "BLOCK",
+      "expectedFindings": [
+        "ASR-DOCKER-001",
+        "ASR-DOCKER-002",
+        "ASR-RUNTIME-001"
+      ],
+      "actualFindings": [
+        {
+          "ruleId": "ASR-DOCKER-001",
+          "title": "Container does not prove non-root runtime",
+          "severity": "high",
+          "domains": [
+            "docker-runtime"
+          ],
+          "strategy": "Incremental Refactor",
+          "evidence": [
+            "Dockerfile",
+            "docker-compose.yml"
+          ]
+        },
+        {
+          "ruleId": "ASR-DOCKER-002",
+          "title": "Privileged runtime settings weaken isolation",
+          "severity": "critical",
+          "domains": [
+            "docker-runtime"
+          ],
+          "strategy": "Human Architecture Review Required",
+          "evidence": [
+            "Dockerfile",
+            "docker-compose.yml"
+          ]
+        },
+        {
+          "ruleId": "ASR-RUNTIME-001",
+          "title": "Untrusted workload shares Linux kernel without mitigation evidence",
+          "severity": "critical",
+          "domains": [
+            "docker-runtime",
+            "ci-cd",
+            "agent-config"
+          ],
+          "strategy": "MIGRATION_PLAN_REQUIRED",
+          "evidence": [
+            "Dockerfile",
+            "docker-compose.yml"
+          ]
+        }
+      ],
+      "truePositiveFindings": [
+        "ASR-DOCKER-001",
+        "ASR-DOCKER-002",
+        "ASR-RUNTIME-001"
+      ],
+      "falseNegativeFindings": [],
+      "falsePositiveFindings": [],
+      "passed": true
+    },
+    {
+      "name": "unsafe-api-contract",
+      "repo": "fixtures/unsafe-api-contract",
+      "expectedVerdict": "MIGRATION_PLAN_REQUIRED",
+      "actualVerdict": "MIGRATION_PLAN_REQUIRED",
+      "expectedFindings": [
+        "ASR-API-001",
+        "ASR-API-002"
+      ],
+      "actualFindings": [
+        {
+          "ruleId": "ASR-API-001",
+          "title": "Breaking public API contract lacks compatibility plan",
+          "severity": "high",
+          "domains": [
+            "api-contract"
+          ],
+          "strategy": "MIGRATION_PLAN_REQUIRED",
+          "evidence": [
+            "openapi.yaml"
+          ]
+        },
+        {
+          "ruleId": "ASR-API-002",
+          "title": "Error schema changes without client impact evidence",
+          "severity": "medium",
+          "domains": [
+            "api-contract"
+          ],
+          "strategy": "MIGRATION_PLAN_REQUIRED",
+          "evidence": [
+            "openapi.yaml"
+          ]
+        }
+      ],
+      "truePositiveFindings": [
+        "ASR-API-001",
+        "ASR-API-002"
+      ],
+      "falseNegativeFindings": [],
+      "falsePositiveFindings": [],
+      "passed": true
+    },
+    {
+      "name": "unsafe-ci",
+      "repo": "fixtures/unsafe-ci",
+      "expectedVerdict": "BLOCK",
+      "actualVerdict": "BLOCK",
+      "expectedFindings": [
+        "ASR-CI-001",
+        "ASR-CI-002",
+        "ASR-CI-005"
+      ],
+      "actualFindings": [
+        {
+          "ruleId": "ASR-CI-001",
+          "title": "Workflow token permissions are too broad",
+          "severity": "high",
+          "domains": [
+            "ci-cd"
+          ],
+          "strategy": "Incremental Refactor",
+          "evidence": [
+            "workflow.yml",
+            "workflows/release.yml"
+          ]
+        },
+        {
+          "ruleId": "ASR-CI-002",
+          "title": "Untrusted pull request code can access sensitive env",
+          "severity": "critical",
+          "domains": [
+            "ci-cd",
+            "sensitive-config"
+          ],
+          "strategy": "Human Architecture Review Required",
+          "evidence": [
+            "workflow.yml",
+            "workflows/release.yml"
+          ]
+        },
+        {
+          "ruleId": "ASR-CI-005",
+          "title": "Self-hosted runner executes untrusted code on shared kernel",
+          "severity": "critical",
+          "domains": [
+            "ci-cd",
+            "docker-runtime"
+          ],
+          "strategy": "MIGRATION_PLAN_REQUIRED",
+          "evidence": [
+            "workflow.yml",
+            "workflows/release.yml"
+          ]
+        }
+      ],
+      "truePositiveFindings": [
+        "ASR-CI-001",
+        "ASR-CI-002",
+        "ASR-CI-005"
+      ],
+      "falseNegativeFindings": [],
+      "falsePositiveFindings": [],
+      "passed": true
+    },
+    {
+      "name": "agent-config-risk",
+      "repo": "fixtures/agent-config-risk",
+      "expectedVerdict": "NEEDS_HUMAN_REVIEW",
+      "actualVerdict": "NEEDS_HUMAN_REVIEW",
+      "expectedFindings": [
+        "ASR-AGENT-001",
+        "ASR-AGENT-002",
+        "ASR-LOCAL-001"
+      ],
+      "actualFindings": [
+        {
+          "ruleId": "ASR-AGENT-001",
+          "title": "Agent instruction change requires review",
+          "severity": "high",
+          "domains": [
+            "agent-config"
+          ],
+          "strategy": "Human Architecture Review Required",
+          "evidence": [
+            "AGENTS.md",
+            "agent/mcp.example.yaml"
+          ]
+        },
+        {
+          "ruleId": "ASR-AGENT-002",
+          "title": "Agent tool permissions combine shell, network, write, and credential access",
+          "severity": "critical",
+          "domains": [
+            "agent-config",
+            "sensitive-config"
+          ],
+          "strategy": "Human Architecture Review Required",
+          "evidence": [
+            "AGENTS.md",
+            "agent/mcp.example.yaml"
+          ]
+        },
+        {
+          "ruleId": "ASR-LOCAL-001",
+          "title": "Repo-local rule attempts to weaken baseline",
+          "severity": "critical",
+          "domains": [
+            "agent-config"
+          ],
+          "strategy": "Human Architecture Review Required",
+          "evidence": [
+            "AGENTS.md",
+            "agent/mcp.example.yaml"
+          ]
+        }
+      ],
+      "truePositiveFindings": [
+        "ASR-AGENT-001",
+        "ASR-AGENT-002",
+        "ASR-LOCAL-001"
+      ],
+      "falseNegativeFindings": [],
+      "falsePositiveFindings": [],
+      "passed": true
+    },
+    {
+      "name": "unsafe-cloud-iam",
+      "repo": "fixtures/unsafe-cloud-iam",
+      "expectedVerdict": "BLOCK",
+      "actualVerdict": "BLOCK",
+      "expectedFindings": [
+        "ASR-IAM-003",
+        "ASR-IAM-004",
+        "ASR-IAM-006"
+      ],
+      "actualFindings": [
+        {
+          "ruleId": "ASR-IAM-003",
+          "title": "Service account authority crosses workload or environment boundaries",
+          "severity": "critical",
+          "domains": [
+            "cloud-iam"
+          ],
+          "strategy": "Human Architecture Review Required",
+          "evidence": [
+            "cloud-iam.yml"
+          ]
+        },
+        {
+          "ruleId": "ASR-IAM-004",
+          "title": "Cloud resource policy public exposure lacks owner evidence",
+          "severity": "critical",
+          "domains": [
+            "cloud-iam"
+          ],
+          "strategy": "Human Architecture Review Required",
+          "evidence": [
+            "cloud-iam.yml"
+          ]
+        },
+        {
+          "ruleId": "ASR-IAM-006",
+          "title": "Break-glass access lacks owner or drill evidence",
+          "severity": "high",
+          "domains": [
+            "cloud-iam"
+          ],
+          "strategy": "Incremental Refactor with Human Checkpoints",
+          "evidence": [
+            "cloud-iam.yml"
+          ]
+        }
+      ],
+      "truePositiveFindings": [
+        "ASR-IAM-003",
+        "ASR-IAM-004",
+        "ASR-IAM-006"
+      ],
+      "falseNegativeFindings": [],
+      "falsePositiveFindings": [],
+      "passed": true
+    },
+    {
+      "name": "unsafe-supply-chain",
+      "repo": "fixtures/unsafe-supply-chain",
+      "expectedVerdict": "BLOCK",
+      "actualVerdict": "BLOCK",
+      "expectedFindings": [
+        "ASR-SC-003",
+        "ASR-SC-004",
+        "ASR-SC-007"
+      ],
+      "actualFindings": [
+        {
+          "ruleId": "ASR-SC-003",
+          "title": "Dependency lifecycle scripts are not bounded",
+          "severity": "high",
+          "domains": [
+            "supply-chain"
+          ],
+          "strategy": "Incremental Refactor with Human Checkpoints",
+          "evidence": [
+            "package.json"
+          ]
+        },
+        {
+          "ruleId": "ASR-SC-004",
+          "title": "Package publishing authority is not protected",
+          "severity": "critical",
+          "domains": [
+            "supply-chain"
+          ],
+          "strategy": "Human Architecture Review Required",
+          "evidence": [
+            "package.json"
+          ]
+        },
+        {
+          "ruleId": "ASR-SC-007",
+          "title": "Dependency confusion boundary is ambiguous",
+          "severity": "high",
+          "domains": [
+            "supply-chain"
+          ],
+          "strategy": "Incremental Refactor with Human Checkpoints",
+          "evidence": [
+            "package.json"
+          ]
+        }
+      ],
+      "truePositiveFindings": [
+        "ASR-SC-003",
+        "ASR-SC-004",
+        "ASR-SC-007"
+      ],
+      "falseNegativeFindings": [],
+      "falsePositiveFindings": [],
+      "passed": true
+    },
+    {
+      "name": "unsafe-ai-data-boundary",
+      "repo": "fixtures/unsafe-ai-data-boundary",
+      "expectedVerdict": "BLOCK",
+      "actualVerdict": "BLOCK",
+      "expectedFindings": [
+        "ASR-AI-001",
+        "ASR-AI-002",
+        "ASR-AI-003",
+        "ASR-AI-004"
+      ],
+      "actualFindings": [
+        {
+          "ruleId": "ASR-AI-001",
+          "title": "AI retrieval or trace path can mix tenant data",
+          "severity": "critical",
+          "domains": [
+            "data-privacy",
+            "agent-config"
+          ],
+          "strategy": "Human Architecture Review Required",
+          "evidence": [
+            "ai-data-policy.yml"
+          ]
+        },
+        {
+          "ruleId": "ASR-AI-002",
+          "title": "Training use lacks exclusion or opt-out evidence",
+          "severity": "critical",
+          "domains": [
+            "data-privacy"
+          ],
+          "strategy": "Human Architecture Review Required",
+          "evidence": [
+            "ai-data-policy.yml"
+          ]
+        },
+        {
+          "ruleId": "ASR-AI-003",
+          "title": "High-impact model-assisted decision lacks human review",
+          "severity": "critical",
+          "domains": [
+            "data-privacy",
+            "agent-config"
+          ],
+          "strategy": "Human Architecture Review Required",
+          "evidence": [
+            "ai-data-policy.yml"
+          ]
+        },
+        {
+          "ruleId": "ASR-AI-004",
+          "title": "Tool output crosses AI processor boundary without handling evidence",
+          "severity": "high",
+          "domains": [
+            "data-privacy",
+            "agent-config"
+          ],
+          "strategy": "Incremental Refactor with Human Checkpoints",
+          "evidence": [
+            "ai-data-policy.yml"
+          ]
+        }
+      ],
+      "truePositiveFindings": [
+        "ASR-AI-001",
+        "ASR-AI-002",
+        "ASR-AI-003",
+        "ASR-AI-004"
+      ],
+      "falseNegativeFindings": [],
+      "falsePositiveFindings": [],
+      "passed": true
+    }
+  ]
+}

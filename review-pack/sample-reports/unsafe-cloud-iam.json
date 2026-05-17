@@ -1,0 +1,85 @@
+{
+  "verdict": "BLOCK",
+  "mode": "Audit Mode",
+  "scope": [
+    "cloud-iam"
+  ],
+  "subject": "unsafe-cloud-iam",
+  "summary": {
+    "currentWork": "fixture self-test",
+    "baselineRulesLoaded": true,
+    "referenceOverlaysLoaded": true,
+    "repoLocalConventionsReviewed": true,
+    "externalScannerEvidence": "not provided"
+  },
+  "findings": [
+    {
+      "ruleId": "ASR-IAM-003",
+      "title": "Service account authority crosses workload or environment boundaries",
+      "severity": "critical",
+      "domains": [
+        "cloud-iam"
+      ],
+      "strategy": "Human Architecture Review Required",
+      "evidence": [
+        "cloud-iam.yml"
+      ]
+    },
+    {
+      "ruleId": "ASR-IAM-004",
+      "title": "Cloud resource policy public exposure lacks owner evidence",
+      "severity": "critical",
+      "domains": [
+        "cloud-iam"
+      ],
+      "strategy": "Human Architecture Review Required",
+      "evidence": [
+        "cloud-iam.yml"
+      ]
+    },
+    {
+      "ruleId": "ASR-IAM-006",
+      "title": "Break-glass access lacks owner or drill evidence",
+      "severity": "high",
+      "domains": [
+        "cloud-iam"
+      ],
+      "strategy": "Incremental Refactor with Human Checkpoints",
+      "evidence": [
+        "cloud-iam.yml"
+      ]
+    }
+  ],
+  "scorecard": {
+    "axes": {
+      "coreInvariantDamage": 0,
+      "blastRadius": 4,
+      "migrationRisk": 1,
+      "testability": 1,
+      "boundaryClarity": 4,
+      "operationalEvidence": 3
+    },
+    "commonScore": "fixture-derived",
+    "domainModifiers": [
+      "ASR-IAM-003",
+      "ASR-IAM-004",
+      "ASR-IAM-006"
+    ],
+    "hardTriggers": [
+      "ASR-IAM-003",
+      "ASR-IAM-004"
+    ],
+    "finalScore": "fixture-derived"
+  },
+  "remediation": {
+    "strategy": "Incremental Refactor with Human Checkpoints",
+    "why": [
+      "Based on fixture findings and hard triggers."
+    ],
+    "nextSafeAction": "Keep this fixture outcome stable when editing rules."
+  },
+  "runtimeCveExposure": null,
+  "missingEvidence": [
+    "Missing Evidence entries are explicit where runtime, patch, or human-review evidence is not available."
+  ]
+}

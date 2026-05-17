@@ -1,0 +1,249 @@
+{
+  "verdict": "BLOCK",
+  "mode": "Audit Mode",
+  "scope": [
+    "docker-runtime",
+    "ci-cd",
+    "agent-config",
+    "cloud-iam",
+    "supply-chain",
+    "data-privacy"
+  ],
+  "subject": "sample-expanded-risk",
+  "summary": {
+    "currentWork": "fixture self-test",
+    "baselineRulesLoaded": true,
+    "referenceOverlaysLoaded": true,
+    "repoLocalConventionsReviewed": true,
+    "externalScannerEvidence": "not provided"
+  },
+  "findings": [
+    {
+      "ruleId": "ASR-DOCKER-001",
+      "title": "Container does not prove non-root runtime",
+      "severity": "high",
+      "domains": [
+        "docker-runtime"
+      ],
+      "strategy": "Incremental Refactor",
+      "evidence": [
+        "Dockerfile",
+        "docker-compose.yml"
+      ]
+    },
+    {
+      "ruleId": "ASR-DOCKER-002",
+      "title": "Privileged runtime settings weaken isolation",
+      "severity": "critical",
+      "domains": [
+        "docker-runtime"
+      ],
+      "strategy": "Human Architecture Review Required",
+      "evidence": [
+        "Dockerfile",
+        "docker-compose.yml"
+      ]
+    },
+    {
+      "ruleId": "ASR-RUNTIME-001",
+      "title": "Untrusted workload shares Linux kernel without mitigation evidence",
+      "severity": "critical",
+      "domains": [
+        "docker-runtime",
+        "ci-cd",
+        "agent-config"
+      ],
+      "strategy": "MIGRATION_PLAN_REQUIRED",
+      "evidence": [
+        "Dockerfile",
+        "docker-compose.yml"
+      ]
+    },
+    {
+      "ruleId": "ASR-IAM-003",
+      "title": "Service account authority crosses workload or environment boundaries",
+      "severity": "critical",
+      "domains": [
+        "cloud-iam"
+      ],
+      "strategy": "Human Architecture Review Required",
+      "evidence": [
+        "cloud-iam.yml"
+      ]
+    },
+    {
+      "ruleId": "ASR-IAM-004",
+      "title": "Cloud resource policy public exposure lacks owner evidence",
+      "severity": "critical",
+      "domains": [
+        "cloud-iam"
+      ],
+      "strategy": "Human Architecture Review Required",
+      "evidence": [
+        "cloud-iam.yml"
+      ]
+    },
+    {
+      "ruleId": "ASR-IAM-006",
+      "title": "Break-glass access lacks owner or drill evidence",
+      "severity": "high",
+      "domains": [
+        "cloud-iam"
+      ],
+      "strategy": "Incremental Refactor with Human Checkpoints",
+      "evidence": [
+        "cloud-iam.yml"
+      ]
+    },
+    {
+      "ruleId": "ASR-SC-003",
+      "title": "Dependency lifecycle scripts are not bounded",
+      "severity": "high",
+      "domains": [
+        "supply-chain"
+      ],
+      "strategy": "Incremental Refactor with Human Checkpoints",
+      "evidence": [
+        "package.json"
+      ]
+    },
+    {
+      "ruleId": "ASR-SC-004",
+      "title": "Package publishing authority is not protected",
+      "severity": "critical",
+      "domains": [
+        "supply-chain"
+      ],
+      "strategy": "Human Architecture Review Required",
+      "evidence": [
+        "package.json"
+      ]
+    },
+    {
+      "ruleId": "ASR-SC-007",
+      "title": "Dependency confusion boundary is ambiguous",
+      "severity": "high",
+      "domains": [
+        "supply-chain"
+      ],
+      "strategy": "Incremental Refactor with Human Checkpoints",
+      "evidence": [
+        "package.json"
+      ]
+    },
+    {
+      "ruleId": "ASR-AI-001",
+      "title": "AI retrieval or trace path can mix tenant data",
+      "severity": "critical",
+      "domains": [
+        "data-privacy",
+        "agent-config"
+      ],
+      "strategy": "Human Architecture Review Required",
+      "evidence": [
+        "ai-data-policy.yml"
+      ]
+    },
+    {
+      "ruleId": "ASR-AI-002",
+      "title": "Training use lacks exclusion or opt-out evidence",
+      "severity": "critical",
+      "domains": [
+        "data-privacy"
+      ],
+      "strategy": "Human Architecture Review Required",
+      "evidence": [
+        "ai-data-policy.yml"
+      ]
+    },
+    {
+      "ruleId": "ASR-AI-003",
+      "title": "High-impact model-assisted decision lacks human review",
+      "severity": "critical",
+      "domains": [
+        "data-privacy",
+        "agent-config"
+      ],
+      "strategy": "Human Architecture Review Required",
+      "evidence": [
+        "ai-data-policy.yml"
+      ]
+    },
+    {
+      "ruleId": "ASR-AI-004",
+      "title": "Tool output crosses AI processor boundary without handling evidence",
+      "severity": "high",
+      "domains": [
+        "data-privacy",
+        "agent-config"
+      ],
+      "strategy": "Incremental Refactor with Human Checkpoints",
+      "evidence": [
+        "ai-data-policy.yml"
+      ]
+    }
+  ],
+  "scorecard": {
+    "axes": {
+      "coreInvariantDamage": 4,
+      "blastRadius": 4,
+      "migrationRisk": 1,
+      "testability": 1,
+      "boundaryClarity": 4,
+      "operationalEvidence": 3
+    },
+    "commonScore": "fixture-derived",
+    "domainModifiers": [
+      "ASR-DOCKER-001",
+      "ASR-DOCKER-002",
+      "ASR-RUNTIME-001",
+      "ASR-IAM-003",
+      "ASR-IAM-004",
+      "ASR-IAM-006",
+      "ASR-SC-003",
+      "ASR-SC-004",
+      "ASR-SC-007",
+      "ASR-AI-001",
+      "ASR-AI-002",
+      "ASR-AI-003",
+      "ASR-AI-004"
+    ],
+    "hardTriggers": [
+      "ASR-DOCKER-002",
+      "ASR-RUNTIME-001",
+      "ASR-IAM-003",
+      "ASR-IAM-004",
+      "ASR-SC-004",
+      "ASR-AI-001",
+      "ASR-AI-002",
+      "ASR-AI-003"
+    ],
+    "finalScore": "fixture-derived"
+  },
+  "remediation": {
+    "strategy": "Strangler Migration",
+    "why": [
+      "Based on fixture findings and hard triggers."
+    ],
+    "nextSafeAction": "Keep this fixture outcome stable when editing rules."
+  },
+  "runtimeCveExposure": {
+    "advisoryId": "ASR-ADV-COPY-FAIL",
+    "cve": "CVE-2026-31431",
+    "runtime": {
+      "runningKernel": "Missing Evidence",
+      "kernelPatch": "Missing Evidence",
+      "rebootEvidence": "Missing Evidence"
+    },
+    "exposure": {
+      "sharedLinuxKernelBoundary": "present",
+      "runnerIsolation": "Missing Evidence"
+    },
+    "mitigationEvidence": [
+      "Missing Evidence"
+    ]
+  },
+  "missingEvidence": [
+    "Missing Evidence entries are explicit where runtime, patch, or human-review evidence is not available."
+  ]
+}

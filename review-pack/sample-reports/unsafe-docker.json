@@ -1,0 +1,107 @@
+{
+  "verdict": "BLOCK",
+  "mode": "Audit Mode",
+  "scope": [
+    "docker-runtime",
+    "ci-cd",
+    "agent-config"
+  ],
+  "subject": "unsafe-docker",
+  "summary": {
+    "currentWork": "fixture self-test",
+    "baselineRulesLoaded": true,
+    "referenceOverlaysLoaded": true,
+    "repoLocalConventionsReviewed": true,
+    "externalScannerEvidence": "not provided"
+  },
+  "findings": [
+    {
+      "ruleId": "ASR-DOCKER-001",
+      "title": "Container does not prove non-root runtime",
+      "severity": "high",
+      "domains": [
+        "docker-runtime"
+      ],
+      "strategy": "Incremental Refactor",
+      "evidence": [
+        "Dockerfile",
+        "docker-compose.yml"
+      ]
+    },
+    {
+      "ruleId": "ASR-DOCKER-002",
+      "title": "Privileged runtime settings weaken isolation",
+      "severity": "critical",
+      "domains": [
+        "docker-runtime"
+      ],
+      "strategy": "Human Architecture Review Required",
+      "evidence": [
+        "Dockerfile",
+        "docker-compose.yml"
+      ]
+    },
+    {
+      "ruleId": "ASR-RUNTIME-001",
+      "title": "Untrusted workload shares Linux kernel without mitigation evidence",
+      "severity": "critical",
+      "domains": [
+        "docker-runtime",
+        "ci-cd",
+        "agent-config"
+      ],
+      "strategy": "MIGRATION_PLAN_REQUIRED",
+      "evidence": [
+        "Dockerfile",
+        "docker-compose.yml"
+      ]
+    }
+  ],
+  "scorecard": {
+    "axes": {
+      "coreInvariantDamage": 0,
+      "blastRadius": 4,
+      "migrationRisk": 1,
+      "testability": 1,
+      "boundaryClarity": 1,
+      "operationalEvidence": 3
+    },
+    "commonScore": "fixture-derived",
+    "domainModifiers": [
+      "ASR-DOCKER-001",
+      "ASR-DOCKER-002",
+      "ASR-RUNTIME-001"
+    ],
+    "hardTriggers": [
+      "ASR-DOCKER-002",
+      "ASR-RUNTIME-001"
+    ],
+    "finalScore": "fixture-derived"
+  },
+  "remediation": {
+    "strategy": "Strangler Migration",
+    "why": [
+      "Based on fixture findings and hard triggers."
+    ],
+    "nextSafeAction": "Keep this fixture outcome stable when editing rules."
+  },
+  "runtimeCveExposure": {
+    "advisoryId": "ASR-ADV-COPY-FAIL",
+    "cve": "CVE-2026-31431",
+    "runtime": {
+      "runningKernel": "Missing Evidence",
+      "kernelPatch": "Missing Evidence",
+      "rebootEvidence": "Missing Evidence"
+    },
+    "exposure": {
+      "sharedLinuxKernelBoundary": "present",
+      "runnerIsolation": "Missing Evidence"
+    },
+    "mitigationEvidence": [
+      "Missing Evidence"
+    ]
+  },
+  "missingEvidence": [
+    "Missing Evidence entries are explicit where runtime, patch, or human-review evidence is not available."
+  ]
+}

@@ -1,0 +1,103 @@
+{
+  "verdict": "BLOCK",
+  "mode": "Audit Mode",
+  "scope": [
+    "data-privacy",
+    "agent-config"
+  ],
+  "subject": "unsafe-ai-data-boundary",
+  "summary": {
+    "currentWork": "fixture self-test",
+    "baselineRulesLoaded": true,
+    "referenceOverlaysLoaded": true,
+    "repoLocalConventionsReviewed": true,
+    "externalScannerEvidence": "not provided"
+  },
+  "findings": [
+    {
+      "ruleId": "ASR-AI-001",
+      "title": "AI retrieval or trace path can mix tenant data",
+      "severity": "critical",
+      "domains": [
+        "data-privacy",
+        "agent-config"
+      ],
+      "strategy": "Human Architecture Review Required",
+      "evidence": [
+        "ai-data-policy.yml"
+      ]
+    },
+    {
+      "ruleId": "ASR-AI-002",
+      "title": "Training use lacks exclusion or opt-out evidence",
+      "severity": "critical",
+      "domains": [
+        "data-privacy"
+      ],
+      "strategy": "Human Architecture Review Required",
+      "evidence": [
+        "ai-data-policy.yml"
+      ]
+    },
+    {
+      "ruleId": "ASR-AI-003",
+      "title": "High-impact model-assisted decision lacks human review",
+      "severity": "critical",
+      "domains": [
+        "data-privacy",
+        "agent-config"
+      ],
+      "strategy": "Human Architecture Review Required",
+      "evidence": [
+        "ai-data-policy.yml"
+      ]
+    },
+    {
+      "ruleId": "ASR-AI-004",
+      "title": "Tool output crosses AI processor boundary without handling evidence",
+      "severity": "high",
+      "domains": [
+        "data-privacy",
+        "agent-config"
+      ],
+      "strategy": "Incremental Refactor with Human Checkpoints",
+      "evidence": [
+        "ai-data-policy.yml"
+      ]
+    }
+  ],
+  "scorecard": {
+    "axes": {
+      "coreInvariantDamage": 4,
+      "blastRadius": 4,
+      "migrationRisk": 1,
+      "testability": 1,
+      "boundaryClarity": 4,
+      "operationalEvidence": 3
+    },
+    "commonScore": "fixture-derived",
+    "domainModifiers": [
+      "ASR-AI-001",
+      "ASR-AI-002",
+      "ASR-AI-003",
+      "ASR-AI-004"
+    ],
+    "hardTriggers": [
+      "ASR-AI-001",
+      "ASR-AI-002",
+      "ASR-AI-003"
+    ],
+    "finalScore": "fixture-derived"
+  },
+  "remediation": {
+    "strategy": "Incremental Refactor with Human Checkpoints",
+    "why": [
+      "Based on fixture findings and hard triggers."
+    ],
+    "nextSafeAction": "Keep this fixture outcome stable when editing rules."
+  },
+  "runtimeCveExposure": null,
+  "missingEvidence": [
+    "Missing Evidence entries are explicit where runtime, patch, or human-review evidence is not available."
+  ]
+}

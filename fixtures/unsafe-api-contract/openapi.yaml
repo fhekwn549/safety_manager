@@ -1,0 +1,8 @@
+openapi: 3.1.0
+info:
+  title: Unsafe API
+  version: 2.0.0
+x-change-notes:
+  - BREAKING_CHANGE
+  - removed field
+  - error_shape_changed

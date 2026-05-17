@@ -1,0 +1,84 @@
+{
+  "verdict": "BLOCK",
+  "mode": "Audit Mode",
+  "scope": [
+    "supply-chain"
+  ],
+  "subject": "unsafe-supply-chain",
+  "summary": {
+    "currentWork": "fixture self-test",
+    "baselineRulesLoaded": true,
+    "referenceOverlaysLoaded": true,
+    "repoLocalConventionsReviewed": true,
+    "externalScannerEvidence": "not provided"
+  },
+  "findings": [
+    {
+      "ruleId": "ASR-SC-003",
+      "title": "Dependency lifecycle scripts are not bounded",
+      "severity": "high",
+      "domains": [
+        "supply-chain"
+      ],
+      "strategy": "Incremental Refactor with Human Checkpoints",
+      "evidence": [
+        "package.json"
+      ]
+    },
+    {
+      "ruleId": "ASR-SC-004",
+      "title": "Package publishing authority is not protected",
+      "severity": "critical",
+      "domains": [
+        "supply-chain"
+      ],
+      "strategy": "Human Architecture Review Required",
+      "evidence": [
+        "package.json"
+      ]
+    },
+    {
+      "ruleId": "ASR-SC-007",
+      "title": "Dependency confusion boundary is ambiguous",
+      "severity": "high",
+      "domains": [
+        "supply-chain"
+      ],
+      "strategy": "Incremental Refactor with Human Checkpoints",
+      "evidence": [
+        "package.json"
+      ]
+    }
+  ],
+  "scorecard": {
+    "axes": {
+      "coreInvariantDamage": 0,
+      "blastRadius": 4,
+      "migrationRisk": 1,
+      "testability": 1,
+      "boundaryClarity": 4,
+      "operationalEvidence": 3
+    },
+    "commonScore": "fixture-derived",
+    "domainModifiers": [
+      "ASR-SC-003",
+      "ASR-SC-004",
+      "ASR-SC-007"
+    ],
+    "hardTriggers": [
+      "ASR-SC-004"
+    ],
+    "finalScore": "fixture-derived"
+  },
+  "remediation": {
+    "strategy": "Incremental Refactor with Human Checkpoints",
+    "why": [
+      "Based on fixture findings and hard triggers."
+    ],
+    "nextSafeAction": "Keep this fixture outcome stable when editing rules."
+  },
+  "runtimeCveExposure": null,
+  "missingEvidence": [
+    "Missing Evidence entries are explicit where runtime, patch, or human-review evidence is not available."
+  ]
+}

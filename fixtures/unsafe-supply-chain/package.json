@@ -1,0 +1,11 @@
+{
+  "name": "unsafe-supply-chain",
+  "scripts": {
+    "preinstall": "node install.js"
+  },
+  "agenticSafetyFixture": {
+    "dependency_lifecycle_scripts_unbounded": true,
+    "package_publishing_unprotected": true,
+    "dependency_confusion_risk": true
+  }
+}

@@ -1,0 +1,56 @@
+[
+  {
+    "name": "safe-basic-service",
+    "repo": "fixtures/safe-basic-service",
+    "expectedVerdict": "PASS",
+    "expectedFindings": []
+  },
+  {
+    "name": "bad-identity-payment",
+    "repo": "fixtures/bad-identity-payment",
+    "expectedVerdict": "BLOCK",
+    "expectedFindings": ["ASR-DB-001", "ASR-PAY-001"]
+  },
+  {
+    "name": "unsafe-docker",
+    "repo": "fixtures/unsafe-docker",
+    "expectedVerdict": "BLOCK",
+    "expectedFindings": ["ASR-DOCKER-001", "ASR-DOCKER-002", "ASR-RUNTIME-001"]
+  },
+  {
+    "name": "unsafe-api-contract",
+    "repo": "fixtures/unsafe-api-contract",
+    "expectedVerdict": "MIGRATION_PLAN_REQUIRED",
+    "expectedFindings": ["ASR-API-001", "ASR-API-002"]
+  },
+  {
+    "name": "unsafe-ci",
+    "repo": "fixtures/unsafe-ci",
+    "expectedVerdict": "BLOCK",
+    "expectedFindings": ["ASR-CI-001", "ASR-CI-002", "ASR-CI-005"]
+  },
+  {
+    "name": "agent-config-risk",
+    "repo": "fixtures/agent-config-risk",
+    "expectedVerdict": "NEEDS_HUMAN_REVIEW",
+    "expectedFindings": ["ASR-AGENT-001", "ASR-AGENT-002", "ASR-LOCAL-001"]
+  },
+  {
+    "name": "unsafe-cloud-iam",
+    "repo": "fixtures/unsafe-cloud-iam",
+    "expectedVerdict": "BLOCK",
+    "expectedFindings": ["ASR-IAM-003", "ASR-IAM-004", "ASR-IAM-006"]
+  },
+  {
+    "name": "unsafe-supply-chain",
+    "repo": "fixtures/unsafe-supply-chain",
+    "expectedVerdict": "BLOCK",
+    "expectedFindings": ["ASR-SC-003", "ASR-SC-004", "ASR-SC-007"]
+  },
+  {
+    "name": "unsafe-ai-data-boundary",
+    "repo": "fixtures/unsafe-ai-data-boundary",
+    "expectedVerdict": "BLOCK",
+    "expectedFindings": ["ASR-AI-001", "ASR-AI-002", "ASR-AI-003", "ASR-AI-004"]
+  }
+]

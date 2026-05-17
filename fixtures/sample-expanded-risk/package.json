@@ -1,0 +1,8 @@
+{
+  "name": "sample-expanded-risk",
+  "agenticSafetyFixture": {
+    "dependency_lifecycle_scripts_unbounded": true,
+    "package_publishing_unprotected": true,
+    "dependency_confusion_risk": true
+  }
+}

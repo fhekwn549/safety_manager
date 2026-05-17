@@ -1,0 +1,24 @@
+domains:
+  api-contract:
+    reference_overlays:
+      - base
+  docker-runtime:
+    reference_overlays:
+      - base
+  ci-cd:
+    reference_overlays:
+      - runner-hardening
+  data-privacy:
+    reference_overlays:
+      - ai-data-boundary
+      - export-deletion
+  payments-entitlements:
+    reference_overlays:
+      - reconciliation
+  observability:
+    reference_overlays:
+      - audit-trails
+
+audit:
+  require_missing_evidence: true
+  report_runtime_cve_exposure: true

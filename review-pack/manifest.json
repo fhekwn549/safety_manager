@@ -1,0 +1,48 @@
+{
+  "generatedBy": "npm run review-pack",
+  "fixtures": [
+    "sample-expanded-risk",
+    "unsafe-docker",
+    "unsafe-supply-chain",
+    "unsafe-ai-data-boundary",
+    "unsafe-cloud-iam",
+    "safe-basic-service"
+  ],
+  "files": [
+    "README.md",
+    "eval-report.json",
+    "eval-report.md",
+    "feedback-template.csv",
+    "feedback-template.md",
+    "known-limitations.md",
+    "manifest.json",
+    "post-draft.md",
+    "reviewer-rubric.md",
+    "sample-reports/safe-basic-service.json",
+    "sample-reports/safe-basic-service.md",
+    "sample-reports/sample-expanded-risk.json",
+    "sample-reports/sample-expanded-risk.md",
+    "sample-reports/unsafe-ai-data-boundary.json",
+    "sample-reports/unsafe-ai-data-boundary.md",
+    "sample-reports/unsafe-cloud-iam.json",
+    "sample-reports/unsafe-cloud-iam.md",
+    "sample-reports/unsafe-docker.json",
+    "sample-reports/unsafe-docker.md",
+    "sample-reports/unsafe-supply-chain.json",
+    "sample-reports/unsafe-supply-chain.md"
+  ],
+  "sampleReports": [
+    "safe-basic-service.json",
+    "safe-basic-service.md",
+    "sample-expanded-risk.json",
+    "sample-expanded-risk.md",
+    "unsafe-ai-data-boundary.json",
+    "unsafe-ai-data-boundary.md",
+    "unsafe-cloud-iam.json",
+    "unsafe-cloud-iam.md",
+    "unsafe-docker.json",
+    "unsafe-docker.md",
+    "unsafe-supply-chain.json",
+    "unsafe-supply-chain.md"
+  ]
+}

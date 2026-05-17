@@ -1,0 +1,14 @@
+name: unsafe release
+on:
+  pull_request_target:
+    branches: [main]
+permissions: write-all
+jobs:
+  build:
+    runs-on: [self-hosted, linux]
+    steps:
+      - uses: actions/checkout@v4
+      - run: npm install && npm test
+        env:
+          SENSITIVE_ENV_AVAILABLE: true
+          shared_kernel_runner: true

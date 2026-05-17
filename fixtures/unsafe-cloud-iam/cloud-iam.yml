@@ -1,0 +1,3 @@
+service_account_reused_across_envs: true
+public_resource_policy_without_owner: true
+break_glass_without_owner: true
